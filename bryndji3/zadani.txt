@@ -1,0 +1,45 @@
+BOMBERMAN
+
+Zadání progtest:
+Implementujte jednoduchou hru po vzoru hry Bomberman. Ve hře Bomberman hráč může umisťovat bomby, které po výbuchu ničí okolní zdi a případně eliminují postavy.
+Hra musí umožňovat alespoň tyto dva režimy:
+    hru dvou hráčů na jednom počítači,
+    hru proti počítači.
+Implementujte následující funkcionality:
+    Implementujte jednoduchou AI počítačového hráče (náhodné tahy nestačí).
+    Některé zdi je možné zničit, po zničení s určitou pravděpodobností zanechají bonus.
+    Implementujte alespoň 5 druhů bonusů, například se můžete inspirovat těmito:
+        změna počtu dostupných bomb,
+        změna velikosti plamene plamene,
+        hráč může po určitou dobu chodit přes bomby,
+        automatické kladení bomb (postava nemůže ovládat umístění bomby, bomba je umístěna automaticky, jakmile ji má hráč k dispozici),
+        manuální odpálení bomby.
+    Hra musí být konfigurovatelná ze souboru:
+        načítání herních úrovní (př. mapy, …),
+        pravděpodobnosti jednotlivých bonusů,
+    Hra umožňuje zobrazit tabulku nejlepších hráčů.
+Kde lze využít polymorfismus? (doporučené)
+    efekty bonusů a nemocí: zvětšení plamenu, zvýšení počtu bomb, inverze ovládání, …
+    ovládání hráčů: lokální hráč (nastavení klávesnice), umělá inteligence (různé druhy), síťový hráč, …
+    uživatelské rozhraní: konzolové, ncurses, SDL, OpenGL (různé druhy), …
+
+
+Upřesněné zadání:
+Hra je pro 1 až 4 hráče s možností doplnění hráčů o počítačem ovládáné protihráče. Vyhrává poslední hráč naživu. 
+Hráči pokládají bomby, které mohou zabít ostatní hráče nebo rozbít některé objekty na mapě, ze kterých následně může 
+vypadnout nějaký bonus.
+Polymorfismus se využívá mezi třídou GameObject a ostatními objekty, při volání funkcí hit() a getIcon().
+
+Seznam bonusů (pravděpodobně se ještě změní):
+    - počet bomb které hráč může mít v jednu chvíli položené na mapě
+    - větší dosah výbuchu bomby
+    - bonusový život
+    - zvýšená rychlost pohybu
+    - hráč bude dočasně moci chodit přes bomby
+
+Konfigurační soubor je ve formátu
+    [název proměnné] = [hodnota] [libovolné komentáře do konce řádku] 
+
+
+
+Tabulka nejlepších hráčů obsahuje seznam všech hráčů kteří hru hráli, společně s počtem odehraných her a počtem výher.

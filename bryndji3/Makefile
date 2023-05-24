@@ -1,10 +1,13 @@
 CXX=g++
 CFLAGS=-Wall -pedantic
 
+SRCS := $(wildcard src/*.cpp)
+OBJS := $(SRCS:.cpp=.o)
+
 all: bryndji3
 
-bryndji3: src/main.o src/GameMaster.o src/GameObject.o src/Wall.o src/Loader.o
-	$(CXX) $(CFLAGS) -o  $@ $^
+bryndji3: $(OBJS)
+	$(CXX) $(CFLAGS) -o  $@ $(OBJS)  -lncurses -fsanitize=address
 
 run: bryndji3
 	./bryndji3

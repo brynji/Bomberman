@@ -31,6 +31,10 @@ void UI::start(){
     getch();
 }
 
+int UI::getInput(){
+    return getchar();
+}
+
 void UI::draw(int x, int y, std::array<std::string,yMultiplier> ch, int colorPair){
     for(int i=0;i<yMultiplier;i++){
         wattron(win,COLOR_PAIR(colorPair));

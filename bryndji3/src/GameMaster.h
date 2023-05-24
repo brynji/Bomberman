@@ -3,6 +3,7 @@
 #include <map>
 
 #include "Map.h"
+#include "Player.h"
 
 class GameMaster{
     public:
@@ -18,4 +19,5 @@ class GameMaster{
     const std::string configFile = "examples/config";   //Config file path
     std::map<std::string,int> config;   //Loaded config file
     Map map;    //Current map
+    std::vector<Player> players;
 };

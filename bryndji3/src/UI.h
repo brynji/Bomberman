@@ -22,6 +22,8 @@ public:
     //start of the game - draw map, show players and health
     void start();
 
+    int getInput();
+
     //Used for drawing characters
     void draw(int x, int y, std::array<std::string,yMultiplier> ch, int colorPair);
 

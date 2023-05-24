@@ -21,19 +21,21 @@ void GameMaster::start(){
 void GameMaster::mainLoop(){
     UI ui(map);
     ui.start();
-    /*
-    while(hrát){
-        getInput();
-        for each living player{
-            move players
-            if(map(playerMovePos)->stepOn){
-                playerPos=playerMovePos
-            }
+
+    int input;
+
+    while(true){
+        input = ui.getInput();
+        for(auto & pl : players){
+            if(pl.input(input)){}
+            // move players
+            // if(map(playerMovePos)->stepOn){
+            //     playerPos=playerMovePos
+            // }
 
         }
-        check timeEvents(); //for bomb explosions, characters movement
+        //check timeEvents(); //for bomb explosions, characters movement
     }    
-    */
 }
 
 void GameMaster::closeGame(){

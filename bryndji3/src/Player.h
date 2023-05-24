@@ -4,7 +4,7 @@
 
 class Player : public Character {
 public:
-    Player(int x, int y): Character(x,y){}
+    Player(int x, int y, int color): Character(x,y,color){}
 
     bool input(int in, int& xOut, int& yOut);
 

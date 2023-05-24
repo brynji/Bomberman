@@ -15,14 +15,17 @@ void GameMaster::start(){
         closeGame();
         return;
     }
-    players.emplace_back(1,1);
+    players.emplace_back(0,10,4);
+    players.emplace_back(0,0,4);
     mainLoop();
 }
 
 void GameMaster::mainLoop(){
     UI ui(map);
     ui.start();
-
+    for(const auto & pl : players){
+        ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
+    }
     int input;
 
     while(true){
@@ -38,7 +41,7 @@ void GameMaster::mainLoop(){
                 ui.redraw(pl.xPos,pl.yPos);
                 pl.xPos=x;
                 pl.yPos=y;
-                ui.drawCharacter(x,y,2);
+                ui.drawCharacter(x,y,pl.color);
             }
             // move players
             // if(map(playerMovePos)->stepOn){

@@ -5,11 +5,14 @@ UI::UI(const Map & nMap){
     initscr();
     start_color();
     curs_set(0);
+    noecho();
+    nodelay(win, true);
 
     //definice párů barev
     init_pair(1,COLOR_WHITE,COLOR_WHITE);   //WALL
     init_pair(2,COLOR_BLUE,COLOR_BLACK);    //CRATE
     init_pair(3,COLOR_BLACK,COLOR_BLACK);   //EMPTY
+    init_pair(4,COLOR_GREEN,COLOR_BLACK);
 }
 
 UI::~UI(){
@@ -26,11 +29,10 @@ void UI::start(){
     //print map
     for(int i=0;i<map.sizeY;i++){
         for(int j=0;j<map.sizeX;j++){
-            redraw(i,j);
+            redraw(j,i);
         }
     }
     wrefresh(win);
-    getch();
 }
 
 //--------------------------------------------------------------------------------------------------

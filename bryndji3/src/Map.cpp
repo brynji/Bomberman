@@ -39,5 +39,5 @@ Map::Map(const std::string & file){
 }
 
 gameObject Map::operator () (int x, int y){
-    return map.at((x*sizeX)+y);
+    return map.at((y*sizeX)+x);
 }

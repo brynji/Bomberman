@@ -7,6 +7,7 @@ enum gameObject{
     wall,
     crate,
     powerup,
+    bomb,
     empty
 };
 

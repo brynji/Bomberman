@@ -2,11 +2,11 @@
 
 class Character {
 public:
-    Character(int nX, int nY): x(nX), y(nY){}
+    Character(int nX, int nY): xPos(nX), yPos(nY){}
     virtual ~Character() = default;
 
-    int x;
-    int y;
+    int xPos;
+    int yPos;
     int offsetX;
     int offsetY;
     int health;

@@ -16,6 +16,8 @@ UI::~UI(){
     endwin();
 }
 
+//--------------------------------------------------------------------------------------------------
+
 void UI::start(){
     clear();
     win = newwin((map.sizeY)*3+2,(map.sizeX)*5+2,5,5);
@@ -31,16 +33,30 @@ void UI::start(){
     getch();
 }
 
+//--------------------------------------------------------------------------------------------------
+
 int UI::getInput(){
     return getchar();
 }
 
-void UI::draw(int x, int y, std::array<std::string,yMultiplier> ch, int colorPair){
-    for(int i=0;i<yMultiplier;i++){
-        wattron(win,COLOR_PAIR(colorPair));
-        mvwaddstr (win, yMultiplier*(x)+i+1, xMultiplier*(y)+1, ch.at(i).c_str());
-        wattroff(win,COLOR_PAIR(colorPair));
+//--------------------------------------------------------------------------------------------------
+
+void UI::drawCharacter(int x, int y, int colorPair){
+    wattron(win,COLOR_PAIR(colorPair));
+    for(int i=0;i<yCharacterSize;i++){
+        mvwaddstr (win, yMultiplier*(y)+i+1, xMultiplier*(x)+1, characterIcon[i].c_str());
     }
+    wattroff(win,COLOR_PAIR(colorPair));
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void UI::draw(int x, int y, std::string ch [yMultiplier], int colorPair){
+    wattron(win,COLOR_PAIR(colorPair));
+    for(int i=0;i<yMultiplier;i++){
+        mvwaddstr (win, yMultiplier*(y)+i+1, xMultiplier*(x)+1, ch[i].c_str());
+    }
+    wattroff(win,COLOR_PAIR(colorPair));
 }
 
 void UI::redraw(int x, int y){
@@ -59,7 +75,10 @@ void UI::redraw(int x, int y){
     }
 }
 
+//--------------------------------------------------------------------------------------------------
+
 void UI::update(){
+    wrefresh(win);
     while(!map.refreshQueue.empty()){
         redraw(map.refreshQueue.front().first,map.refreshQueue.front().second);
         map.refreshQueue.pop();

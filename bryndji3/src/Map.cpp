@@ -1,9 +1,6 @@
 #include <fstream>
 
 #include "Map.h"
-#include "Crate.h"
-#include "Wall.h"
-#include "EmptyGO.h"
 
 
 Map::Map(){

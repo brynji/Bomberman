@@ -27,7 +27,6 @@ void UI::start(){
             redraw(i,j);
         }
     }
-
     wrefresh(win);
     getch();
 }

@@ -4,5 +4,6 @@
 
 class Player : public Character {
 public:
+    Player(int x, int y): Character(x,y){}
 
 };

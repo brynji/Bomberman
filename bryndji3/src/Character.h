@@ -2,7 +2,7 @@
 
 class Character {
 public:
-    
+    Character(int nX, int nY): x(nX), y(nY){}
     virtual ~Character() = default;
 
     int x;

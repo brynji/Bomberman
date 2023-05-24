@@ -2,9 +2,13 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include <memory>
 
-#include "GameObject.h"
+enum gameObject{
+    wall,
+    crate,
+    powerup,
+    empty
+};
 
 class Map{
     public:
@@ -15,9 +19,9 @@ class Map{
     Map(const std::string & file);
 
     //Acces map at[x,y]
-    std::shared_ptr<GameObject> operator () (int x, int y);
+    gameObject operator () (int x, int y);
     
-    std::vector<std::shared_ptr<GameObject>> map;
+    std::vector<gameObject> map;
     std::queue<std::pair<int,int>> refreshQueue;
     int sizeX;
     int sizeY;

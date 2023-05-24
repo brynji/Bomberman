@@ -22,9 +22,9 @@ void UI::start(){
     box(win,0,0);
     refresh();
     //print map
-    for(int i=0; i<map.sizeY;i++){
+    for(int i=0;i<map.sizeY;i++){
         for(int j=0;j<map.sizeX;j++){
-            draw(i,j,map(i,j)->icon,map(i,j)->colorPair);
+            redraw(i,j);
         }
     }
 
@@ -41,8 +41,19 @@ void UI::draw(int x, int y, std::array<std::string,yMultiplier> ch, int colorPai
 }
 
 void UI::redraw(int x, int y){
-    std::shared_ptr<GameObject> go=map(x,y);
-    draw(x,y,go->icon,go->colorPair);
+    gameObject go=map(x,y);
+    switch (go)
+    {
+    case wall:
+        draw(x,y,wallIcon,wallColor);
+        break;
+    case crate:
+        draw(x,y,crateIcon,crateColor);
+        break;
+    case empty:
+        draw(x,y,emptyIcon,emptyColor);
+        break;
+    }
 }
 
 void UI::update(){

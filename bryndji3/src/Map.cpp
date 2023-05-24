@@ -17,10 +17,6 @@ Map::Map(const std::string & file){
         throw std::logic_error("Error opening map");
     }
 
-    auto empty = std::make_shared<EmptyGO>();
-    auto wall = std::make_shared<Wall>();
-    auto crate = std::make_shared<Crate>();
-
     mapF>>sizeY>>sizeX;
     std::string line1;
     std::getline(mapF,line1);
@@ -45,6 +41,6 @@ Map::Map(const std::string & file){
     }
 }
 
-std::shared_ptr<GameObject> Map::operator () (int x, int y){
+gameObject Map::operator () (int x, int y){
     return map.at((x*sizeX)+y);
 }

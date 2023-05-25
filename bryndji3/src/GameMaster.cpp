@@ -15,13 +15,12 @@ void GameMaster::start(){
         closeGame();
         return;
     }
-    players.emplace_back(0,10,4);
-    players.emplace_back(0,0,4);
+    players.emplace_back(1,10,4);
     mainLoop();
 }
 
 void GameMaster::mainLoop(){
-    UI ui(map);
+    UI ui(&map);
     ui.start();
     for(const auto & pl : players){
         ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
@@ -29,28 +28,29 @@ void GameMaster::mainLoop(){
     int input;
 
     while(true){
-        ui.update();
         input = ui.getInput();
         if(input==27){break;} /////////////////////////////////////////////////
         for(auto & pl : players){
             int x,y;
             if(!pl.input(input,x,y)){
-                break;
+                continue;
             }
-            if(x>=0 && x<map.sizeX && y>=0 && y<map.sizeY && map(x,y)!=wall && map(x,y)!=crate){
+            if(x>=0 && x<map.sizeX && y>=0 && y<map.sizeY && map(x,y)>2){
                 ui.redraw(pl.xPos,pl.yPos);
                 pl.xPos=x;
                 pl.yPos=y;
                 ui.drawCharacter(x,y,pl.color);
+            } else if(x==-123 && y==-123){
+                map(pl.xPos,pl.yPos)=bomb;
+                ui.redraw(pl.xPos,pl.yPos);
+                ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
             }
-            // move players
-            // if(map(playerMovePos)->stepOn){
-            //     playerPos=playerMovePos
-            // }
-
         }
         //check timeEvents(); //for bomb explosions, characters movement
 
+        if(map(3,0)==wall) map(3,0)=crate;
+        else map(3,0)=wall;
+        ui.redraw(3,0);
     }    
 }
 

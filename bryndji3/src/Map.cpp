@@ -38,6 +38,6 @@ Map::Map(const std::string & file){
     }
 }
 
-gameObject Map::operator () (int x, int y){
+gameObject & Map::operator () (int x, int y){
     return map.at((y*sizeX)+x);
 }

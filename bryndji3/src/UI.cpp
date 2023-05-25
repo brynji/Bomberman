@@ -1,12 +1,11 @@
 #include "UI.h"
 
-UI::UI(const Map & nMap){
+UI::UI(Map * nMap){
     map=nMap;
     initscr();
     start_color();
     curs_set(0);
     noecho();
-    nodelay(win, true);
 
     //definice párů barev
     init_pair(1,COLOR_WHITE,COLOR_WHITE);   //WALL
@@ -23,12 +22,13 @@ UI::~UI(){
 
 void UI::start(){
     clear();
-    win = newwin((map.sizeY)*3+2,(map.sizeX)*5+2,5,5);
+    win = newwin((map->sizeY)*3+2,(map->sizeX)*5+2,5,5);
+    nodelay(win, TRUE);
     box(win,0,0);
     refresh();
     //print map
-    for(int i=0;i<map.sizeY;i++){
-        for(int j=0;j<map.sizeX;j++){
+    for(int i=0;i<map->sizeY;i++){
+        for(int j=0;j<map->sizeX;j++){
             redraw(j,i);
         }
     }
@@ -38,7 +38,7 @@ void UI::start(){
 //--------------------------------------------------------------------------------------------------
 
 int UI::getInput(){
-    return getchar();
+    return wgetch(win);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ void UI::draw(int x, int y, std::string ch [yMultiplier], int colorPair){
 }
 
 void UI::redraw(int x, int y){
-    gameObject go=map(x,y);
+    gameObject go=(*map)(x,y);
     switch (go)
     {
     case wall:
@@ -74,15 +74,9 @@ void UI::redraw(int x, int y){
     case empty:
         draw(x,y,emptyIcon,emptyColor);
         break;
-    }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void UI::update(){
-    wrefresh(win);
-    while(!map.refreshQueue.empty()){
-        redraw(map.refreshQueue.front().first,map.refreshQueue.front().second);
-        map.refreshQueue.pop();
+    case bomb:
+        draw(x,y,bombIcon,bombColor);
+    default:
+        break;
     }
 }

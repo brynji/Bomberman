@@ -9,6 +9,9 @@ public:
     int yPos;
     int offsetX;
     int offsetY;
-    int health;
+
     int color;
+
+    int health=1;
+    int explosionSize=2;
 };

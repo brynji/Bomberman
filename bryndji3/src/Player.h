@@ -12,5 +12,5 @@ public:
     int keyRight = 'd';
     int keyUp = 'w';
     int keyDown = 's';
-    int keyBomb = ' ';
+    int keyBomb = 'q';
 };

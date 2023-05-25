@@ -1,13 +1,12 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <queue>
 
 enum gameObject{
     wall,
     crate,
-    powerup,
     bomb,
+    powerup,
     empty
 };
 
@@ -20,10 +19,9 @@ class Map{
     Map(const std::string & file);
 
     //Acces map at[x,y]
-    gameObject operator () (int x, int y);
+    gameObject & operator () (int x, int y);
     
     std::vector<gameObject> map;
-    std::queue<std::pair<int,int>> refreshQueue;
     int sizeX;
     int sizeY;
 };

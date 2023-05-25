@@ -15,7 +15,8 @@ bool Player::input(int in, int& xOut, int& yOut){
         xOut=xPos+1;
         yOut=yPos;
     } else if(in==keyBomb){
-        //Place bomb
+        xOut=-123;
+        yOut=-123;
     } else {
         return false;
     }

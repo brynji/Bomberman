@@ -53,7 +53,7 @@ void UI::drawCharacter(int x, int y, int colorPair){
 
 //--------------------------------------------------------------------------------------------------
 
-void UI::draw(int x, int y, std::string ch [yMultiplier], int colorPair){
+void UI::draw(int x, int y, std::string ch [], int colorPair){
     wattron(win,COLOR_PAIR(colorPair));
     for(int i=0;i<yMultiplier;i++){
         mvwaddstr (win, yMultiplier*(y)+i+1, xMultiplier*(x)+1, ch[i].c_str());
@@ -78,5 +78,14 @@ void UI::redraw(int x, int y){
         draw(x,y,bombIcon,bombColor);
     default:
         break;
+    }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void UI::update(){
+    while(!map->drawQueue.empty()){
+        redraw(map->drawQueue.front().first,map->drawQueue.front().second);
+        map->drawQueue.pop();
     }
 }

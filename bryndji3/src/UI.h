@@ -34,6 +34,8 @@ public:
     void redraw(int x, int y);
     void draw(int x, int y, std::string ch [], int colorPair);
 
+    void update();
+
 WINDOW * win;
 Map * map;
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <queue>
 
 enum gameObject{
     wall,
@@ -22,6 +23,7 @@ class Map{
     gameObject & operator () (int x, int y);
     
     std::vector<gameObject> map;
+    std::queue<std::pair<int,int>> drawQueue;
     int sizeX;
     int sizeY;
 };

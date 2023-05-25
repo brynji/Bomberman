@@ -2,6 +2,7 @@
 #include "Loader.h"
 #include "Menu.h"
 #include "UI.h"
+#include "Bomb.h"
 
 void GameMaster::start(){
     Loader l;
@@ -42,6 +43,7 @@ void GameMaster::mainLoop(){
                 ui.drawCharacter(x,y,pl.color);
             } else if(x==-123 && y==-123){
                 map(pl.xPos,pl.yPos)=bomb;
+                //Create bomb
                 ui.redraw(pl.xPos,pl.yPos);
                 ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
             }

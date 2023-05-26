@@ -1,7 +1,5 @@
 #include "BiggerExplosion.h"
 
-BiggerExplosion::BiggerExplosion(Player & nPl) : PowerUp(nPl) {}
-
-void BiggerExplosion::pickUp(){
+void BiggerExplosion::pickUp(Character & pl){
     pl.explosionSize+=1;
 }

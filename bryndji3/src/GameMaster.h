@@ -4,6 +4,7 @@
 
 #include "Map.h"
 #include "UI.h"
+#include "Character.h"
 #include "Player.h"
 
 class GameMaster{
@@ -17,7 +18,9 @@ class GameMaster{
     //Close game and clean screen
     void closeGame();
 
-    void movePlayer(int x, int y, Player & pl, UI ui);
+    void moveCharacter(int x, int y, Character & pl, UI ui);
+    
+    void getPowerUp(Character & pl);
 
     const std::string configFile = "examples/config";   //Config file path
     std::map<std::string,int> config;   //Loaded config file

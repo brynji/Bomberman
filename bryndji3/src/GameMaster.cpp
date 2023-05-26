@@ -34,9 +34,11 @@ void GameMaster::mainLoop(){
         for(auto & pl : players){
             int x,y;
             if(pl.input(input,x,y)){
-                movePlayer(x,y,pl,ui);
+                moveCharacter(x,y,pl,ui);
             }
         }
+        //move ai players 
+        
         //check timeEvents(); //for bomb explosions, characters movement timers
 
 
@@ -47,11 +49,16 @@ void GameMaster::mainLoop(){
     }    
 }
 
-void GameMaster::movePlayer(int x, int y, Player & pl, UI ui){
+void GameMaster::moveCharacter(int x, int y, Character & pl, UI ui){
     if(x>=0 && x<map.sizeX && y>=0 && y<map.sizeY && map(x,y)>2){
         ui.redraw(pl.xPos,pl.yPos);
         pl.xPos=x;
         pl.yPos=y;
+        if(map(x,y)==powerup){
+            getPowerUp(pl);
+            map(x,y)=empty;
+            ui.redraw(x,y);
+        }
         ui.drawCharacter(x,y,pl.color);
     } else if(x==-123 && y==-123){
         map(pl.xPos,pl.yPos)=bomb;
@@ -59,6 +66,11 @@ void GameMaster::movePlayer(int x, int y, Player & pl, UI ui){
         ui.redraw(pl.xPos,pl.yPos);
         ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
     }
+}
+
+void GameMaster::getPowerUp(Character & pl){
+    //choose random powerup
+    //chosenPowerUp.pickUp(pl);
 }
 
 void GameMaster::closeGame(){

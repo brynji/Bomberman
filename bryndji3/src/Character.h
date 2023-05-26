@@ -11,8 +11,9 @@ public:
     int offsetY;
 
     int color;
+    bool canMove = true;
 
-    int health=1;
+    int health = 1;
     int explosionSize = 2;
     int maxBombs = 1;
 };

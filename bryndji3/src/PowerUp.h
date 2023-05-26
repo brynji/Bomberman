@@ -1,12 +1,8 @@
 #pragma once
 
-#include "Player.h"
+#include "Character.h"
 
 class PowerUp {
     public:
-    PowerUp(Player & nPl);
-
-    virtual void pickUp()=0;
-
-    Player pl;
+    virtual void pickUp(Character & pl)=0;
 };

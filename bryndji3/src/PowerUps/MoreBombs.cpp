@@ -1,7 +1,5 @@
 #include "MoreBombs.h"
 
-MoreBombs::MoreBombs(Player & nPl) : PowerUp(nPl) {}
-
-void MoreBombs::pickUp(){
+void MoreBombs::pickUp(Character & pl){
     pl.maxBombs+=1;
 }

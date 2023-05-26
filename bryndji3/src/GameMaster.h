@@ -3,6 +3,7 @@
 #include <map>
 
 #include "Map.h"
+#include "UI.h"
 #include "Player.h"
 
 class GameMaster{
@@ -15,6 +16,8 @@ class GameMaster{
 
     //Close game and clean screen
     void closeGame();
+
+    void movePlayer(int x, int y, Player & pl, UI ui);
 
     const std::string configFile = "examples/config";   //Config file path
     std::map<std::string,int> config;   //Loaded config file

@@ -1,14 +1,12 @@
 #pragma once
 
-#include "GameObject.h"
+#include "Player.h"
 
-class PowerUp : public GameObject {
+class PowerUp {
     public:
+    PowerUp(Player & nPl);
 
-    //Called when hit by bomb - does nothing
-    void hit(){}
-
-    //Called when player picks up powerUp, grant bonus to player
     virtual void pickUp()=0;
 
+    Player pl;
 };

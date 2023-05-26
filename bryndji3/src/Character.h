@@ -13,5 +13,6 @@ public:
     int color;
 
     int health=1;
-    int explosionSize=2;
+    int explosionSize = 2;
+    int maxBombs = 1;
 };

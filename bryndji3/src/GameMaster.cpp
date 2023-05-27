@@ -29,6 +29,7 @@ void GameMaster::mainLoop(){
     int input;
 
     while(true){
+        ui.update();
         input = ui.getInput();
         if(input==27){break;} /////////////////////////////////////////////////
         for(auto & pl : players){
@@ -38,9 +39,11 @@ void GameMaster::mainLoop(){
             }
         }
         //move ai players 
-        
+        //check bombs
+        if(!bombs.empty() && bombs.front()()){
+            bombs.pop();
+        }
         //check timeEvents(); //for bomb explosions, characters movement timers
-
 
         //test if input is really non blocking
         if(map(3,0)==wall) map(3,0)=crate;
@@ -62,7 +65,7 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI ui){
         ui.drawCharacter(x,y,pl.color);
     } else if(x==-123 && y==-123){
         map(pl.xPos,pl.yPos)=bomb;
-        //Create bomb
+        bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&map);
         ui.redraw(pl.xPos,pl.yPos);
         ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
     }

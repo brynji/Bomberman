@@ -6,6 +6,7 @@
 #include "UI.h"
 #include "Character.h"
 #include "Player.h"
+#include "Bomb.h"
 
 class GameMaster{
     public:
@@ -26,4 +27,5 @@ class GameMaster{
     std::map<std::string,int> config;   //Loaded config file
     Map map;    //Current map
     std::vector<Player> players;
+    std::queue<Bomb> bombs;
 };

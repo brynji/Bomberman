@@ -1,15 +1,25 @@
+#pragma once
 #include "Map.h"
 
-class Bomb {
-    Bomb(int nX, int nY, int nExplosionSize, Map * nMap) : x(nX), y(nY), explosionSize(nExplosionSize), map(nMap){} 
+#define delay 1000
 
-    void Explode(){
-        (*map)(x,y)=empty;
-    }
+class Bomb {
+    public:
+    Bomb(int nX, int nY, int nExplosionSize, Map * nMap);
+
+    bool operator() ();
+
+    void Explode();
+
+    void Clean();
+
+    
 
     int x;
     int y;
     int explosionSize;
-
+    uint64_t time;
     Map * map;
+
+    bool exploded = false;
 };

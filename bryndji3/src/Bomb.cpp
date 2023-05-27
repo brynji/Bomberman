@@ -2,31 +2,86 @@
 
 #include <chrono>
 
-Bomb::Bomb(int nX, int nY, int nExplosionSize, Map * nMap) : x(nX), y(nY), explosionSize(nExplosionSize), map(nMap){
+Bomb::Bomb(int nX, int nY, int nExplosionSize, Character * nPl, Map * nMap) : x(nX), y(nY), explosionSize(nExplosionSize), pl(nPl), map(nMap){
     time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() + delay;
+    pl->currBombs += 1;
 }
 
-bool Bomb::operator() (){
+BombState Bomb::operator() (){
     uint64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     if(now>=time){
-        if(exploded){
+        if(bombState==exploded){
             Clean();
-            return true;
+            bombState=cleanedExplosion;
         } else {
             Explode();
-            exploded=true;
+            bombState=exploded;
             time = now+200;
+            pl->currBombs -= 1;
         }
     }
-    return false;
+    return bombState;
 }
 
+bool Bomb::explosionBehaviour(int x, int y){
+    if(x<0 || x>=map->sizeX || y<0 || y>=map->sizeY){
+        return false;
+    }
+    gameObject go = (*map)(x,y);
+    if(go==wall){
+        return false;
+    }
+    map->drawQueue.push({x,y});
+    if(go==crate){
+        //add percent chance
+        if((rand()%100)<=powerUpChance){
+            (*map)(x,y)=powerup;
+        } else {
+            (*map)(x,y)=empty;
+        }
+        return false;
+    } 
+    else if(go!=powerup && go!=bomb){
+        (*map)(x,y)=explosion;
+    } 
+    return true;
+}
+
+void Bomb::ExplodeRec(int xAdd, int yAdd, int i, int depth){
+    if(i==depth) return;
+    if(explosionBehaviour(x+(xAdd*i),y+(yAdd*i))){
+        ExplodeRec(xAdd,yAdd,i+1,depth);
+    }
+    return;
+}
 
 void Bomb::Explode(){
-        (*map)(x,y)=empty;
-        map->drawQueue.push({x,y});
+    (*map)(x,y)=explosion;
+    map->drawQueue.push({x,y});
+    ExplodeRec(-1,0,1,explosionSize+1);
+    ExplodeRec(1,0,1,explosionSize+1);
+    ExplodeRec(0,-1,1,explosionSize+1);
+    ExplodeRec(0,1,1,explosionSize+1);
+}
+
+void Bomb::CleanRec(int xAdd, int yAdd, int i, int depth){
+    int currX = x+(xAdd*i);
+    int currY = y+(yAdd*i);
+    if(i==depth || currX<0 || currX>=map->sizeX || currY<0 || currY>=map->sizeY) return;
+    gameObject go = (*map)(currX,currY);
+    if(go==explosion){
+        (*map)(currX,currY)=empty;
+        map->drawQueue.push({currX,currY});
+        CleanRec(xAdd,yAdd,i+1,depth);
+    } else if (go==powerup || go==bomb){
+        CleanRec(xAdd,yAdd,i+1,depth);
     }
+    return;
+}
 
 void Bomb::Clean(){
-
+    CleanRec(-1,0,0,explosionSize+1);
+    CleanRec(1,0,1,explosionSize+1);
+    CleanRec(0,-1,1,explosionSize+1);
+    CleanRec(0,1,1,explosionSize+1);
 }

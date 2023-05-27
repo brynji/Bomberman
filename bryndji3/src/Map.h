@@ -8,7 +8,8 @@ enum gameObject{
     crate,
     bomb,
     powerup,
-    empty
+    empty,
+    explosion
 };
 
 class Map{

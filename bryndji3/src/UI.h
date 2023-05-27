@@ -9,10 +9,12 @@
 #define xCharacterSize 3
 #define yCharacterSize 2
 
-#define wallColor 1
-#define crateColor 2
-#define emptyColor 3
+#define powerUpColor 1
+#define emptyColor 1
+#define wallColor 2
+#define crateColor 3
 #define bombColor 4
+#define explosionColor 5
 
 class UI{
 public:
@@ -42,7 +44,8 @@ Map * map;
 std::string wallIcon    [yMultiplier] = {"     ","     ","     "};
 std::string crateIcon   [yMultiplier] = {"xxxxx","xxxxx","xxxxx"};
 std::string emptyIcon   [yMultiplier] = {"     ","     ","     "};
-std::string powerUpIcon [yMultiplier];
+std::string powerUpIcon [yMultiplier] = {" ___ ","/ ? \\","-----"};
 std::string bombIcon    [yMultiplier] = {" \\ / ","--O--"," / \\ "};
+std::string explosionIcon    [yMultiplier] = {"     ","     ","     "};
 std::string characterIcon [yCharacterSize] = {"ooo","ooo"}; 
 };

@@ -7,7 +7,7 @@ OBJS := $(SRCS:.cpp=.o)
 all: bryndji3
 
 bryndji3: $(OBJS)
-	$(CXX) $(CFLAGS) -o  $@ $(OBJS)  -lncurses -fsanitize=address
+	$(CXX) $(CFLAGS) -o  $@ $(OBJS)  -fsanitize=address -lncurses
 
 run: bryndji3
 	./bryndji3

@@ -19,7 +19,7 @@ class GameMaster{
     //Close game and clean screen
     void closeGame();
 
-    void moveCharacter(int x, int y, Character & pl, UI ui);
+    void moveCharacter(int x, int y, Character & pl, UI & ui);
     
     void getPowerUp(Character & pl);
 

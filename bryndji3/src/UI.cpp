@@ -8,10 +8,11 @@ UI::UI(Map * nMap){
     noecho();
 
     //definice párů barev
-    init_pair(1,COLOR_WHITE,COLOR_WHITE);   //WALL
-    init_pair(2,COLOR_BLUE,COLOR_BLACK);    //CRATE
-    init_pair(3,COLOR_BLACK,COLOR_BLACK);   //EMPTY
+    init_pair(1,COLOR_WHITE,COLOR_BLACK);   //DEFAULT
+    init_pair(2,COLOR_WHITE,COLOR_WHITE);   //WALL
+    init_pair(3,COLOR_BLUE,COLOR_BLACK);    //CRATE
     init_pair(4,COLOR_GREEN,COLOR_BLACK);
+    init_pair(5,COLOR_RED,COLOR_RED);       //EXPLOSION
 }
 
 UI::~UI(){
@@ -76,7 +77,12 @@ void UI::redraw(int x, int y){
         break;
     case bomb:
         draw(x,y,bombIcon,bombColor);
-    default:
+        break;
+    case explosion:
+        draw(x,y,explosionIcon,explosionColor);
+        break;
+    case powerup:
+        draw(x,y,powerUpIcon,powerUpColor);
         break;
     }
 }

@@ -17,6 +17,7 @@ void GameMaster::start(){
         return;
     }
     players.emplace_back(1,10,4);
+    players.emplace_back(1,1,4);
     mainLoop();
 }
 
@@ -40,19 +41,30 @@ void GameMaster::mainLoop(){
         }
         //move ai players 
         //check bombs
-        if(!bombs.empty() && bombs.front()()){
-            bombs.pop();
+        if(!bombs.empty()){
+            BombState bs = bombs.front()();
+            if(bs==exploded){
+                int nOfPl=players.size();
+                for(int i=0;i<nOfPl;i++){
+                    if(map(players[i].xPos,players[i].yPos)==explosion){
+                        if(players[i].hit()==true){
+                            //player died
+                            players.erase(players.begin()+i);
+                            nOfPl--;
+                            i--;
+                        }
+                    }
+                }
+            } 
+            else if(bs==cleanedExplosion){
+                bombs.pop();
+            }
         }
         //check timeEvents(); //for bomb explosions, characters movement timers
-
-        //test if input is really non blocking
-        if(map(3,0)==wall) map(3,0)=crate;
-        else map(3,0)=wall;
-        ui.redraw(3,0);
     }    
 }
 
-void GameMaster::moveCharacter(int x, int y, Character & pl, UI ui){
+void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     if(x>=0 && x<map.sizeX && y>=0 && y<map.sizeY && map(x,y)>2){
         ui.redraw(pl.xPos,pl.yPos);
         pl.xPos=x;
@@ -64,10 +76,12 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI ui){
         }
         ui.drawCharacter(x,y,pl.color);
     } else if(x==-123 && y==-123){
-        map(pl.xPos,pl.yPos)=bomb;
-        bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&map);
-        ui.redraw(pl.xPos,pl.yPos);
-        ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
+        if(map(pl.xPos,pl.yPos)==empty && pl.currBombs<pl.maxBombs){
+            map(pl.xPos,pl.yPos)=bomb;
+            bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&pl,&map);
+            ui.redraw(pl.xPos,pl.yPos);
+            ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
+        }
     }
 }
 

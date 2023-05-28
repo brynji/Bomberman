@@ -6,9 +6,9 @@
 #include <iostream>
 
 void PowerUpHandler::addConfig(std::map<std::string,int> & config){
+    powerUps.emplace_back(std::make_unique<BonusHp>(),config.find("bonusHp_chance")->second);
     powerUps.emplace_back(std::make_unique<BiggerExplosion>(),config.find("biggerExplosion_chance")->second);
     powerUps.emplace_back(std::make_unique<MoreBombs>(),config.find("moreBombs_chance")->second);
-    powerUps.emplace_back(std::make_unique<BonusHp>(),config.find("bonusHp_chance")->second);
 }
 
 void PowerUpHandler::pickUp(Character & pl){

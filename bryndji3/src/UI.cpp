@@ -3,6 +3,11 @@
 UI::UI(Map * nMap){
     map=nMap;
     initscr();
+    int x=0, y=0;
+    while(x<(map->sizeX*xMultiplier+winYOffset+2) || y<(map->sizeY*yMultiplier)+winXOffset+2){
+        getmaxyx(stdscr,y,x);
+        refresh();
+    }
     start_color();
     curs_set(0);
     noecho();
@@ -27,7 +32,7 @@ UI::~UI(){
 
 void UI::start(){
     clear();
-    win = newwin((map->sizeY)*3+2,(map->sizeX)*5+2,5,5);
+    win = newwin((map->sizeY)*3+2,(map->sizeX)*5+2,winYOffset,winXOffset);
     nodelay(win, TRUE);
     keypad(win,true);
     box(win,0,0);

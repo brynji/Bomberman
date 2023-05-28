@@ -8,9 +8,10 @@ Bomb::Bomb(int nX, int nY, int nExplosionSize, Character * nPl, Map * nMap) : x(
 }
 
 BombState Bomb::operator() (){
+    if(bombState==exploded) bombState=explodedAndChecked;
     uint64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     if(now>=time){
-        if(bombState==exploded){
+        if(bombState==explodedAndChecked){
             Clean();
             bombState=cleanedExplosion;
         } else {

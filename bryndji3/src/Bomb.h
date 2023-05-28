@@ -5,7 +5,7 @@
 #define delay 2000
 #define powerUpChance 40
 
-enum BombState {placed,exploded,cleanedExplosion};
+enum BombState {placed,exploded,explodedAndChecked,cleanedExplosion};
 
 
 class Bomb {

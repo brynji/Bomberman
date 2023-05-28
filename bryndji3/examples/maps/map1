@@ -1,12 +1,14 @@
-11 12
-P cxc cxc 
-  s x  x P
- cxc c c c
-x      x
-c c c cxc c
-cx      c c
-  c x c x
-P c x x x P
-xxxxxxxxxxx
-c     x  c 
+15 20
+P cxc cxc c
+  s x  x  
+ cxc c c c  
+x      x 
+c c c cxc  c
+cx      c   xc
+  c x c x x  x 
+c c x x x  x
+c cc  cc  c c  cc      
+c     x  cx    
 x         x
+x  c    cx  
+c     x   x P

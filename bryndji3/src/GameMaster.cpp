@@ -58,8 +58,7 @@ void GameMaster::mainLoop(){
                 int nOfPl=players.size();
                 for(int i=0;i<nOfPl;i++){
                     if(map(players[i]->xPos,players[i]->yPos)==explosion){
-                        if(players[i]->hit()==true){
-                            //player died
+                        if(players[i]->hit()){
                             players.erase(players.begin()+i);
                             nOfPl--;
                             i--;

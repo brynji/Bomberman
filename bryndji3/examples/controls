@@ -4,17 +4,17 @@ player1_left = a
 player1_right = d
 player1_bomb = c
 
-player2_up = i
-player2_down = k
-player2_left = j
-player2_right = l
-player2_bomb = n
+player3_up = i
+player3_down = k
+player3_left = j
+player3_right = l
+player3_bomb = n
 
-player3_up = 8
-player3_down = 5
-player3_left = 4
-player3_right = 6
-player3_bomb = 0
+player2_up = 8
+player2_down = 5
+player2_left = 4
+player2_right = 6
+player2_bomb = .
 
 player4_up = t
 player4_down = g

@@ -4,6 +4,9 @@
 
 #include "Map.h"
 
+#define winXOffset 5
+#define winYOffset 5
+
 #define xMultiplier 5
 #define yMultiplier 3
 

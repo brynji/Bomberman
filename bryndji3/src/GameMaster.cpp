@@ -1,13 +1,12 @@
 #include "GameMaster.h"
 #include "Loader.h"
 #include "Menu.h"
-#include "UI.h"
-#include "Bomb.h"
 
 void GameMaster::start(){
     Loader l;
     l.loadConfig(configFile,config);
     l.loadPowerUps();
+    powerUpHandler.addConfig(config);
 
     Menu m;
     bool start;
@@ -16,8 +15,8 @@ void GameMaster::start(){
         closeGame();
         return;
     }
-    players.emplace_back(1,10,4);
-    players.emplace_back(1,1,4);
+    
+    players.emplace_back(std::make_unique<Player>(1,1,4));
     mainLoop();
 }
 
@@ -25,7 +24,7 @@ void GameMaster::mainLoop(){
     UI ui=(&map);
     ui.start();
     for(const auto & pl : players){
-        ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
+        ui.drawCharacter(pl->xPos,pl->yPos,pl->color);
     }
     int input;
 
@@ -35,8 +34,8 @@ void GameMaster::mainLoop(){
         if(input==27){break;} /////////////////////////////////////////////////
         for(auto & pl : players){
             int x,y;
-            if(pl.input(input,x,y)){
-                moveCharacter(x,y,pl,ui);
+            if(pl->input(input,x,y)){
+                moveCharacter(x,y,*pl,ui);
             }
         }
         //move ai players 
@@ -46,8 +45,8 @@ void GameMaster::mainLoop(){
             if(bs==exploded){
                 int nOfPl=players.size();
                 for(int i=0;i<nOfPl;i++){
-                    if(map(players[i].xPos,players[i].yPos)==explosion){
-                        if(players[i].hit()==true){
+                    if(map(players[i]->xPos,players[i]->yPos)==explosion){
+                        if(players[i]->hit()==true){
                             //player died
                             players.erase(players.begin()+i);
                             nOfPl--;
@@ -60,6 +59,9 @@ void GameMaster::mainLoop(){
                 bombs.pop();
             }
         }
+        if(players.size()<=1){
+            //return;
+        }
         //check timeEvents(); //for bomb explosions, characters movement timers
     }    
 }
@@ -70,7 +72,7 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
         pl.xPos=x;
         pl.yPos=y;
         if(map(x,y)==powerup){
-            getPowerUp(pl);
+            powerUpHandler.pickUp(pl);
             map(x,y)=empty;
             ui.redraw(x,y);
         }
@@ -85,11 +87,6 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     }
 }
 
-void GameMaster::getPowerUp(Character & pl){
-    //choose random powerup
-    //chosenPowerUp.pickUp(pl);
-}
-
 void GameMaster::closeGame(){
-    
+    throw "idk";
 }

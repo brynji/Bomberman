@@ -2,7 +2,7 @@
 
 #include "Character.h"
 
-class PowerUp {
+class PowerUp{
     public:
-    virtual void pickUp(Character & pl)=0;
+    virtual void pickUp (Character & pl)=0;
 };

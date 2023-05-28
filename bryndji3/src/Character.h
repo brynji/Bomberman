@@ -22,7 +22,7 @@ public:
     bool canMove = true;
 
     int health = 1;
-    int explosionSize = 2;
+    int explosionSize = 1;
     int maxBombs = 2;
     int currBombs = 0;
 };

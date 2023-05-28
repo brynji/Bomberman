@@ -4,7 +4,7 @@
 #include  "Loader.h"
 
 template<typename T>
-bool Loader::load(std::map<std::string,T> & config, std::string target,std::string fileName){
+bool Loader::load(std::map<std::string,T> & config, const std::string & target,const std::string & fileName){
     std::ifstream file(target);
     if(!file.good()){
         std::cout<<"Error when opening "<<fileName<<" file!"<<std::endl;

@@ -1,6 +1,7 @@
 #include "GameMaster.h"
 #include "Loader.h"
 #include "Menu.h"
+#include "Enemy.h"
 
 void GameMaster::start(){
     Loader l;
@@ -16,8 +17,19 @@ void GameMaster::start(){
         closeGame();
         return;
     }
-    
-    players.emplace_back(std::make_unique<Player>(1,1,4));
+    int numOfPlayers=2;
+    int numOfPc=0;
+    for(int i=0;i<numOfPlayers;i++){
+        std::string pl="player"+std::to_string(i+1)+"_";
+        players.emplace_back(std::make_unique<Player>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,4,
+            controls.find(pl+"up")->second,controls.find(pl+"down")->second,
+            controls.find(pl+"left")->second,controls.find(pl+"right")->second,controls.find(pl+"bomb")->second));
+        map.playerSpawnPositions.pop();
+    }
+    for(int i=0;i<numOfPc;i++){
+        players.emplace_back(std::make_unique<Enemy>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,4));
+        map.playerSpawnPositions.pop();
+    }
     srand(time(NULL));
     mainLoop();
 }
@@ -40,8 +52,6 @@ void GameMaster::mainLoop(){
                 moveCharacter(x,y,*pl,ui);
             }
         }
-        //move ai players 
-        //check bombs
         if(!bombs.empty()){
             BombState bs = bombs.front()();
             if(bs==exploded){
@@ -62,7 +72,7 @@ void GameMaster::mainLoop(){
             }
         }
         if(players.size()<=1){
-            //return;
+            return;
         }
         //check timeEvents(); //for bomb explosions, characters movement timers
     }    
@@ -90,5 +100,5 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
 }
 
 void GameMaster::closeGame(){
-    throw "idk";
+
 }

@@ -4,13 +4,13 @@
 
 class Player : public Character {
 public:
-    Player(int x, int y, int color): Character(x,y,color){}
+    Player(int x, int y, int color,int up, int down, int left, int right, int bomb);
 
     bool input(int in, int& xOut, int& yOut) override;
 
-    int keyLeft = 'a';
-    int keyRight = 'd';
-    int keyUp = 'w';
-    int keyDown = 's';
-    int keyBomb = 'q';
+    int keyLeft;
+    int keyRight;
+    int keyUp;
+    int keyDown;
+    int keyBomb;
 };

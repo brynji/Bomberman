@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-Wall -pedantic
+CFLAGS=-Wall -pedantic -o2
 
 SRCS := $(wildcard src/*.cpp)
 OBJS := $(SRCS:.cpp=.o)
@@ -7,7 +7,7 @@ OBJS := $(SRCS:.cpp=.o)
 all: bryndji3
 
 bryndji3: $(OBJS)
-	$(CXX) $(CFLAGS) -o  $@ $(OBJS) -fsanitize=address -lncurses
+	$(CXX) $(CFLAGS) -o  $@ $(OBJS) -fsanitize=address  -lncurses
 
 run: bryndji3
 	./bryndji3

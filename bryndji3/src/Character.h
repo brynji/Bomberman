@@ -2,16 +2,13 @@
 
 class Character {
 public:
-    Character(int nX, int nY, int nColor): xPos(nX), yPos(nY), color(nColor){}
+    Character(int nX, int nY, int nColor);
     
     virtual ~Character() = default;
 
     virtual bool input(int in, int& xOut, int& yOut)=0;
 
-    bool hit(){
-        health-=1;
-        return health<=0;
-    }
+    bool hit();
 
     int xPos;
     int yPos;

@@ -32,6 +32,9 @@ Map::Map(const std::string & file){
                 map.push_back(crate);
             } else {
                 map.push_back(empty);
+                if(*ch=='P'){
+                    playerSpawnPositions.emplace(j,i);
+                }
             }
             ch++;
         }

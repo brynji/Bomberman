@@ -6,7 +6,7 @@ class Loader {
     public:
 
     template<typename T>
-    bool load(std::map<std::string,T> & config, std::string target,std::string fileName);
+    bool load(std::map<std::string,T> & config, const std::string & target, const std::string & fileName);
 
     //Load config file, save all values into map given in second parameter
     bool loadConfig(std::map<std::string,int> & config);

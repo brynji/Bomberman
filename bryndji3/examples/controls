@@ -2,7 +2,7 @@ player1_up = w
 player1_down = s
 player1_left = a
 player1_right = d
-player1_bomb = x
+player1_bomb = c
 
 player2_up = i
 player2_down = k

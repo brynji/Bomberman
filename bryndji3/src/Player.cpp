@@ -1,6 +1,14 @@
 
 #include "Player.h"
 
+Player::Player(int x, int y, int color,int up, int down, int left, int right, int bomb): Character(x,y,color){
+    keyUp=up;
+    keyDown=down;
+    keyLeft=left;
+    keyRight=right;
+    keyBomb=bomb;
+}
+
 bool Player::input(int in, int& xOut, int& yOut){
     if(in==keyBomb){
         xOut=-123;

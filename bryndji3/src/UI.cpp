@@ -29,6 +29,7 @@ void UI::start(){
     clear();
     win = newwin((map->sizeY)*3+2,(map->sizeX)*5+2,5,5);
     nodelay(win, TRUE);
+    keypad(win,true);
     box(win,0,0);
     refresh();
     //print map

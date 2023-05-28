@@ -4,8 +4,9 @@
 
 void GameMaster::start(){
     Loader l;
-    l.loadConfig(configFile,config);
-    l.loadPowerUps();
+    if(!l.loadConfig(config) || !l.loadControls(controls)){
+        return;
+    }
     powerUpHandler.addConfig(config);
 
     Menu m;
@@ -17,6 +18,7 @@ void GameMaster::start(){
     }
     
     players.emplace_back(std::make_unique<Player>(1,1,4));
+    srand(time(NULL));
     mainLoop();
 }
 

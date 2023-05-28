@@ -4,9 +4,12 @@
 
 class Loader {
     public:
-    //Load config file, save all values into map given in second parameter
-    void loadConfig(const std::string & configFile, std::map<std::string,int> & config);
 
-    //Create vector of all powerUps
-    bool loadPowerUps();
+    template<typename T>
+    bool load(std::map<std::string,T> & config, std::string target,std::string fileName);
+
+    //Load config file, save all values into map given in second parameter
+    bool loadConfig(std::map<std::string,int> & config);
+
+    bool loadControls(std::map<std::string,char> & config);
 };

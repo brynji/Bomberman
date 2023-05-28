@@ -23,8 +23,8 @@ class GameMaster{
 
     void moveCharacter(int x, int y, Character & pl, UI & ui);
 
-    const std::string configFile = "examples/config";   //Config file path
     std::map<std::string,int> config;   //Loaded config file
+    std::map<std::string,char> controls;   //Loaded controls file
     Map map;    //Current map
     std::vector<std::unique_ptr<Character>> players;
     std::queue<Bomb> bombs;     //Bombs placed on the map

@@ -1,0 +1,23 @@
+player1_up = w
+player1_down = s
+player1_left = a
+player1_right = d
+player1_bomb = x
+
+player2_up = i
+player2_down = k
+player2_left = j
+player2_right = l
+player2_bomb = n
+
+player3_up = 8
+player3_down = 5
+player3_left = 4
+player3_right = 6
+player3_bomb = 0
+
+player4_up = t
+player4_down = g
+player4_left = f
+player4_right = h
+player4_bomb = v

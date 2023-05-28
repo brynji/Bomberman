@@ -11,8 +11,12 @@ UI::UI(Map * nMap){
     init_pair(1,COLOR_WHITE,COLOR_BLACK);   //DEFAULT
     init_pair(2,COLOR_WHITE,COLOR_WHITE);   //WALL
     init_pair(3,COLOR_BLUE,COLOR_BLACK);    //CRATE
-    init_pair(4,COLOR_GREEN,COLOR_BLACK);
+    init_pair(4,COLOR_GREEN,COLOR_BLACK);   //BOMB
     init_pair(5,COLOR_RED,COLOR_RED);       //EXPLOSION
+    init_pair(10,COLOR_MAGENTA,COLOR_BLACK);   //PLAYER1
+    init_pair(11,COLOR_CYAN,COLOR_BLACK);   //PLAYER2
+    init_pair(12,COLOR_YELLOW,COLOR_BLACK);   //PLAYER3
+    init_pair(13,COLOR_GREEN,COLOR_BLACK);   //PLAYER4
 }
 
 UI::~UI(){

@@ -21,7 +21,7 @@ void GameMaster::start(){
     int numOfPc=0;
     for(int i=0;i<numOfPlayers;i++){
         std::string pl="player"+std::to_string(i+1)+"_";
-        players.emplace_back(std::make_unique<Player>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,4,
+        players.emplace_back(std::make_unique<Player>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,i+10,
             controls.find(pl+"up")->second,controls.find(pl+"down")->second,
             controls.find(pl+"left")->second,controls.find(pl+"right")->second,controls.find(pl+"bomb")->second));
         map.playerSpawnPositions.pop();
@@ -37,13 +37,13 @@ void GameMaster::start(){
 void GameMaster::mainLoop(){
     UI ui=(&map);
     ui.start();
-    for(const auto & pl : players){
-        ui.drawCharacter(pl->xPos,pl->yPos,pl->color);
-    }
     int input;
 
     while(true){
         ui.update();
+        for(const auto & pl : players){
+            ui.drawCharacter(pl->xPos,pl->yPos,pl->color);
+        }
         input = ui.getInput();
         if(input==27){break;} /////////////////////////////////////////////////
         for(auto & pl : players){

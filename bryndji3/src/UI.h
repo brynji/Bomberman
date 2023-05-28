@@ -3,6 +3,7 @@
 #include <ncurses.h>
 
 #include "Map.h"
+
 #define xMultiplier 5
 #define yMultiplier 3
 
@@ -15,6 +16,10 @@
 #define crateColor 3
 #define bombColor 4
 #define explosionColor 5
+#define player1Color 10
+#define player2Color 11
+#define player3Color 12
+#define player4Color 13
 
 class UI{
 public:

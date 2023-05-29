@@ -26,6 +26,7 @@ UI::UI(Map * nMap){
 }
 
 UI::~UI(){
+    clear();
     endwin();
 }
 

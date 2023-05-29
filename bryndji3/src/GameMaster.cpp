@@ -7,19 +7,21 @@
 
 
 void GameMaster::start(){
-    Loader l;
-    if(!l.loadConfig(config) || !l.loadControls(controls)){
-        return;
+    if(config.size()==0){
+        Loader l;
+        if(!l.loadConfig(config) || !l.loadControls(controls)){
+            return;
+        }
+        powerUpHandler.addConfig(config);
     }
-    powerUpHandler.addConfig(config);
 
     Menu m;
-    bool start;
+    bool startGame;
     int numOfPlayers=2;
     int numOfPc=0;
     
-    map = m.main(start,numOfPlayers,numOfPc);
-    if(!start){
+    map = m.main(startGame,numOfPlayers,numOfPc);
+    if(!startGame){
         closeGame();
         return;
     }
@@ -44,6 +46,8 @@ void GameMaster::start(){
     }
     srand(time(NULL));
     mainLoop();
+    reset();
+    return start();
 }
 
 void GameMaster::mainLoop(){
@@ -89,7 +93,6 @@ void GameMaster::mainLoop(){
         if(players.size()<=1){
             return;
         }
-        //check timeEvents(); //for bomb explosions, characters movement timers
     }    
 }
 
@@ -113,6 +116,10 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     }
 }
 
-void GameMaster::closeGame(){
+void GameMaster::reset(){
+    players.clear();
+    bombs.clear();
+}
 
+void GameMaster::closeGame(){
 }

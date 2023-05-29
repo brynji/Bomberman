@@ -18,6 +18,8 @@ class GameMaster{
     //Main game loop - read input, move players, refresh screen
     void mainLoop();
 
+    void reset();
+
     //Close game and clean screen
     void closeGame();
 

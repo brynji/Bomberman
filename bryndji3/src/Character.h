@@ -1,9 +1,10 @@
 #pragma once
 #include <cstdint>
+#include <string>
 
 class Character {
 public:
-    Character(int nX, int nY, int nColor, int nHealth, int nExplosionSize, int nMaxBombs, int nMoveDelay, int nBombDelay);
+    Character(int nX, int nY, int nColor, int nHealth, int nExplosionSize, int nMaxBombs, int nMoveDelay, int nBombDelay, const std::string & nName);
     
     virtual ~Character() = default;
 
@@ -15,6 +16,7 @@ public:
     int yPos;
 
     int color;
+    const std::string name;
 
     int health;
     int explosionSize;

@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
 #include <ncurses.h>
+#include <memory>
 
 #include "Map.h"
+#include "Character.h"
 
-#define winXOffset 5
+#define winXOffset 2
 #define winYOffset 5
 
 #define xMultiplier 5
@@ -33,7 +35,7 @@ public:
     ~UI();
 
     //start of the game - draw map, show players and health
-    void start();
+    void start(std::vector<std::unique_ptr<Character>> & players);
 
     int getInput();
 

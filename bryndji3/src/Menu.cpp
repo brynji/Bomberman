@@ -1,7 +1,5 @@
-#include <filesystem>
 #include <iostream>
 #include <ncurses.h>
-
 #include <string>
 #include <vector>
 
@@ -37,68 +35,86 @@ int Menu::drawMenu(int x, int y, const std::vector<std::string> & options){
     return selected;
 }
 
-Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi){
-    if(!loadMaps()){
+void Menu::showLeaderboard(){
+    std::vector<std::string> leaders;
+    if(!loader.loadLeaderboard(leaders)){
+        mvaddstr(1,5,"Cannot open leaderboard file");
+        getch();
+        return;
+    }
+    auto it = leaders.begin();
+    int i=2;
+    while(it!=leaders.end()){
+        mvaddstr(i,3,it->c_str());
+        i++;
+        it++;
+    }
+    getch();
+}
+
+Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vector<std::string> & names){
+    if(!loader.loadMaps(maps)){
         start=false;
         return Map();
     }
     std::vector<std::string> mainOptions = {"Start","Leaderboard","Quit"};
     initscr();
     keypad(stdscr,true);
+    curs_set(0);
     noecho();
     start_color();
     init_pair(1,COLOR_RED,COLOR_BLACK);
     mvprintw(1,5,"Bomberman");
     int selected = drawMenu(2,3,mainOptions);
+    clear();
     if(selected==2){
         start=false;
         endwin();
         return Map();
+    } else if(selected==1){
+        clear();
+        showLeaderboard();
+        clear();
+        return main(start,numberOfPlayers,numberOfAi,names);
     }
-    clear();
-    mvprintw(0,3,"Number of players must be between 1 and 4.");
-    mvprintw(1,3,"Sum of players and Ai opponents cannot be more than 4.");
+
+
+    mvaddstr(0,3,"Number of players must be between 1 and 4.");
+    mvaddstr(1,3,"Sum of players and Ai opponents cannot be more than 4.");
     while(true){
-        mvprintw(3,5,"Enter number of players:       ");
+        mvaddstr(3,5,"Enter number of players:       ");
         numberOfPlayers=getch()-48;
         if(numberOfPlayers<1 || numberOfPlayers>4){
             continue;
         }
         addstr(std::to_string(numberOfPlayers).c_str());
-        mvprintw(5,5,"Enter number of ai opponents:  ");
+        mvaddstr(5,5,"Enter number of ai opponents:  ");
         numberOfAi=getch()-48;
         if(numberOfAi<0 || numberOfPlayers+numberOfAi>4){
-            mvprintw(5,5,"                                ");
-            mvprintw(3,5,"                                ");
+            mvaddstr(5,5,"                                ");
+            mvaddstr(3,5,"                                ");
             continue;
         }
         break;
     }
     clear();
+    echo();
+    for(int i=1;i<=numberOfPlayers;i++){
+        mvaddstr(0,3,("Enter name of Player"+std::to_string(i)+": ").c_str());
+        std::string name;
+        char ch = getch();
+        while(ch!='\n'){
+            name.push_back(ch);
+            ch=getch();
+        }
+        if(name.length()==0){
+            i--;
+            continue;
+        } 
+        names.push_back(name);
+        clear();
+    }
     endwin();
-    
     start=true;
     return maps.at(0);
-}
-
-bool Menu::loadMaps(){
-    try{
-        const std::filesystem::path dir (mapDir);  
-        for(const auto & x : std::filesystem::directory_iterator(dir)){
-            maps.emplace_back(Map(x.path()));
-            if(maps.back().sizeX<=0 || maps.back().sizeY<=0 || maps.back().playerSpawnPositions.size()<4){
-                std::cout<<"Map \""<<x<<"\" has incorrect size or less than 4 player spawn positions.\nPress Enter to continue."<<std::endl;
-                std::getchar();
-                maps.pop_back();
-            }
-        }
-    } catch (...){
-        std::cout<<"Path \"examples/maps\" does not exist."<<std::endl;
-        return false;
-    }
-    if(maps.size()<1){
-        std::cout<<"No maps loaded."<<std::endl;
-        return false;
-    }
-    return true;
 }

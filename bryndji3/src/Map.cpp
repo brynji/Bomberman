@@ -8,7 +8,9 @@ Map::Map(){}
 Map::Map(const std::string & file){
     std::ifstream mapF(file);
     if(!mapF.good()){
-        throw std::logic_error("Error opening map");
+        sizeY=0;
+        sizeX=0;
+        return;
     }
 
     mapF>>sizeY>>sizeX;

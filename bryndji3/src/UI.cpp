@@ -32,12 +32,16 @@ UI::~UI(){
 
 //--------------------------------------------------------------------------------------------------
 
-void UI::start(){
+void UI::start(std::vector<std::unique_ptr<Character>> & players){
     clear();
     win = newwin((map->sizeY)*3+2,(map->sizeX)*5+2,winYOffset,winXOffset);
     nodelay(win, TRUE);
     keypad(win,true);
     box(win,0,0);
+
+    for(uint i=0;i<players.size();i++){
+        mvaddstr(winYOffset+6*i+1,4+winXOffset+map->sizeX*xMultiplier,players[i]->name.c_str());
+    }
     refresh();
     //print map
     for(int i=0;i<map->sizeY;i++){

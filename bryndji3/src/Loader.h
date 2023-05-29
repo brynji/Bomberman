@@ -1,6 +1,9 @@
 #pragma once
 #include <map>
+#include <vector>
 #include <iostream>
+
+#include "Map.h"
 
 class Loader {
     public:
@@ -12,4 +15,8 @@ class Loader {
     bool loadConfig(std::map<std::string,int> & config);
 
     bool loadControls(std::map<std::string,char> & config);
+
+    bool loadMaps(std::vector<Map> & vec);
+
+    bool loadLeaderboard(std::vector<std::string> & vec);
 };

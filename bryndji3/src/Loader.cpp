@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 #include  "Loader.h"
 
@@ -80,6 +81,41 @@ bool Loader::loadControls(std::map<std::string,char> & config){
             config.find("player4_bomb")==config.end()   ){
         std::cout<<"Missing fields in controls file!"<<std::endl;
         return false;
+    }
+    return true;
+}
+
+bool Loader::loadMaps(std::vector<Map> & maps){
+    try{
+        const std::filesystem::path dir ("examples/maps");  
+        for(const auto & x : std::filesystem::directory_iterator(dir)){
+            maps.emplace_back(Map(x.path()));
+            if(maps.back().sizeX<=0 || maps.back().sizeY<=0 || maps.back().playerSpawnPositions.size()<4){
+                std::cout<<"Map \""<<x<<"\" has incorrect size or less than 4 player spawn positions.\nPress Enter to continue."<<std::endl;
+                std::getchar();
+                maps.pop_back();
+            }
+        }
+    } catch (...){
+        std::cout<<"Path \"examples/maps\" does not exist."<<std::endl;
+        return false;
+    }
+    if(maps.size()<1){
+        std::cout<<"No maps loaded."<<std::endl;
+        return false;
+    }
+    return true;
+}
+
+bool Loader::loadLeaderboard(std::vector<std::string> & vec){
+    std::ifstream leaderboard("examples/.leaderboard");
+    if(!leaderboard.good()){
+        return false;
+    }
+    while(!leaderboard.eof()){
+        std::string line;
+        std::getline(leaderboard,line);
+        vec.push_back(line);
     }
     return true;
 }

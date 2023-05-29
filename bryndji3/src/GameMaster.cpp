@@ -19,8 +19,9 @@ void GameMaster::start(){
     bool startGame;
     int numOfPlayers=2;
     int numOfPc=0;
-    
-    map = m.main(startGame,numOfPlayers,numOfPc);
+    std::vector<std::string> names;
+
+    map = m.main(startGame,numOfPlayers,numOfPc,names);
     if(!startGame){
         closeGame();
         return;
@@ -36,11 +37,11 @@ void GameMaster::start(){
         players.emplace_back(std::make_unique<Player>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,i+10,
             controls.find(pl+"up")->second,controls.find(pl+"down")->second,
             controls.find(pl+"left")->second,controls.find(pl+"right")->second,controls.find(pl+"bomb")->second,
-            health,explosionSize,maxBombs,moveDelay,bombDelay));
+            health,explosionSize,maxBombs,moveDelay,bombDelay,names[i]));
         map.playerSpawnPositions.pop();
     }
     for(int i=0;i<numOfPc;i++){
-        players.emplace_back(std::make_unique<Enemy>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,4,
+        players.emplace_back(std::make_unique<Enemy>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,i+10+numOfPlayers,
         health,explosionSize,maxBombs,moveDelay,bombDelay));
         map.playerSpawnPositions.pop();
     }
@@ -52,7 +53,7 @@ void GameMaster::start(){
 
 void GameMaster::mainLoop(){
     UI ui=(&map);
-    ui.start();
+    ui.start(players);
     int input;
 
     while(true){

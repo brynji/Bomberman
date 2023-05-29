@@ -3,7 +3,7 @@
 
 class Character {
 public:
-    Character(int nX, int nY, int nColor);
+    Character(int nX, int nY, int nColor, int nHealth, int nExplosionSize, int nMaxBombs, int nMoveDelay, int nBombDelay);
     
     virtual ~Character() = default;
 
@@ -16,11 +16,11 @@ public:
 
     int color;
 
-    int health = 1;
-    int explosionSize = 1;
-    int maxBombs = 2;
-    int moveDelay = 150; 
-    int bombDelay = 2000;
+    int health;
+    int explosionSize;
+    int maxBombs;
+    int moveDelay; 
+    int bombDelay;
     
     int currBombs = 0;
     uint64_t moveTime = 0;

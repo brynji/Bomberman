@@ -40,9 +40,14 @@ bool Loader::loadConfig(std::map<std::string,int> & config){
 
     if( config.find("biggerExplosion_chance")==config.end() ||
         config.find("fasterExplosion_chance")==config.end() ||
-        config.find("movementSpeed_chance")==config.end() ||
-        config.find("moreBombs_chance")==config.end() ||
-        config.find("bonusHp_chance")==config.end()   ){
+        config.find("movementSpeed_chance")==config.end()   ||
+        config.find("moreBombs_chance")==config.end()       ||
+        config.find("bonusHp_chance")==config.end()         ||
+        config.find("startingHealth")==config.end()         ||
+        config.find("startingExplosionSize")==config.end()  ||
+        config.find("startingMaxBombs")==config.end()       ||
+        config.find("startingMoveDelay")==config.end()      ||
+        config.find("startingBombDelay")==config.end()      ){
         std::cout<<"Missing fields in config file!"<<std::endl;
         return false;
     }

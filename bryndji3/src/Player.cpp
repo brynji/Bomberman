@@ -1,7 +1,8 @@
 
 #include "Player.h"
 
-Player::Player(int x, int y, int color,int up, int down, int left, int right, int bomb): Character(x,y,color){
+Player::Player(int x, int y, int color,int up, int down, int left, int right, int bomb, int health, int explosionSize, int maxBombs, int moveDelay, int bombDelay): 
+    Character(x,y,color,health,explosionSize,maxBombs,moveDelay,bombDelay){
     keyUp=up;
     keyDown=down;
     keyLeft=left;

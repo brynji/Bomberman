@@ -23,15 +23,23 @@ void GameMaster::start(){
         closeGame();
         return;
     }
+    int health=config.find("startingHealth")->second;
+    int explosionSize=config.find("startingExplosionSize")->second;
+    int maxBombs=config.find("startingMaxBombs")->second;
+    int moveDelay=config.find("startingMoveDelay")->second;
+    int bombDelay=config.find("startingBombDelay")->second;
+
     for(int i=0;i<numOfPlayers;i++){
         std::string pl="player"+std::to_string(i+1)+"_";
         players.emplace_back(std::make_unique<Player>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,i+10,
             controls.find(pl+"up")->second,controls.find(pl+"down")->second,
-            controls.find(pl+"left")->second,controls.find(pl+"right")->second,controls.find(pl+"bomb")->second));
+            controls.find(pl+"left")->second,controls.find(pl+"right")->second,controls.find(pl+"bomb")->second,
+            health,explosionSize,maxBombs,moveDelay,bombDelay));
         map.playerSpawnPositions.pop();
     }
     for(int i=0;i<numOfPc;i++){
-        players.emplace_back(std::make_unique<Enemy>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,4));
+        players.emplace_back(std::make_unique<Enemy>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,4,
+        health,explosionSize,maxBombs,moveDelay,bombDelay));
         map.playerSpawnPositions.pop();
     }
     srand(time(NULL));

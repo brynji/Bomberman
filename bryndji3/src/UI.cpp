@@ -4,6 +4,7 @@ UI::UI(Map * nMap){
     map=nMap;
     initscr();
     int x=0, y=0;
+    addstr("Terminal size is too small.");
     while(x<(map->sizeX*xMultiplier+winYOffset+2) || y<(map->sizeY*yMultiplier)+winXOffset+2){
         getmaxyx(stdscr,y,x);
         refresh();

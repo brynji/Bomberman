@@ -79,21 +79,20 @@ void GameMaster::mainLoop(){
 
 void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     if(x>=0 && x<map.sizeX && y>=0 && y<map.sizeY && map(x,y)>2){
-        ui.redraw(pl.xPos,pl.yPos);
+        map.drawQueue.push({pl.xPos,pl.yPos});
         pl.xPos=x;
         pl.yPos=y;
         if(map(x,y)==powerup){
             powerUpHandler.pickUp(pl);
             map(x,y)=empty;
-            ui.redraw(x,y);
+            map.drawQueue.push({x,y});
         }
         ui.drawCharacter(x,y,pl.color);
     } else if(x==-123 && y==-123){
         if(map(pl.xPos,pl.yPos)==empty && pl.currBombs<pl.maxBombs){
             map(pl.xPos,pl.yPos)=bomb;
             bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&pl,&map);
-            ui.redraw(pl.xPos,pl.yPos);
-            ui.drawCharacter(pl.xPos,pl.yPos,pl.color);
+            map.drawQueue.push({pl.xPos,pl.yPos});
         }
     }
 }

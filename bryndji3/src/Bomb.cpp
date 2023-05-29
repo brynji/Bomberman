@@ -1,15 +1,12 @@
 #include "Bomb.h"
 
-#include <chrono>
-
-Bomb::Bomb(int nX, int nY, int nExplosionSize, Character * nPl, Map * nMap) : x(nX), y(nY), explosionSize(nExplosionSize), pl(nPl), map(nMap){
-    time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() + delay;
+Bomb::Bomb(int nX, int nY, int nExplosionSize, Character * nPl, Map * nMap, const uint64_t & now) : x(nX), y(nY), explosionSize(nExplosionSize), pl(nPl), map(nMap){
+    time = now + delay;
     pl->currBombs += 1;
 }
 
-BombState Bomb::operator() (){
+BombState Bomb::operator() (const uint64_t & now){
     if(bombState==exploded) bombState=explodedAndChecked;
-    uint64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     if(now>=time){
         if(bombState==explodedAndChecked){
             Clean();

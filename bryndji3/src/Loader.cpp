@@ -37,7 +37,9 @@ bool Loader::loadConfig(std::map<std::string,int> & config){
     if(!load<int>(config,"examples/config","config")){
         return false;
     }
+
     if( config.find("biggerExplosion_chance")==config.end() ||
+        config.find("movementSpeed_chance")==config.end() ||
         config.find("moreBombs_chance")==config.end() ||
         config.find("bonusHp_chance")==config.end()   ){
         std::cout<<"Missing fields in config file!"<<std::endl;
@@ -75,4 +77,3 @@ bool Loader::loadControls(std::map<std::string,char> & config){
     }
     return true;
 }
-

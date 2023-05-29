@@ -1,7 +1,10 @@
+#include <chrono>
+
 #include "GameMaster.h"
 #include "Loader.h"
 #include "Menu.h"
 #include "Enemy.h"
+
 
 void GameMaster::start(){
     Loader l;
@@ -40,6 +43,7 @@ void GameMaster::mainLoop(){
     int input;
 
     while(true){
+        timeNow = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
         ui.update();
         for(const auto & pl : players){
             ui.drawCharacter(pl->xPos,pl->yPos,pl->color);
@@ -48,12 +52,12 @@ void GameMaster::mainLoop(){
         if(input==27){break;} /////////////////////////////////////////////////
         for(auto & pl : players){
             int x,y;
-            if(pl->input(input,x,y)){
+            if(pl->input(input,timeNow,x,y)){
                 moveCharacter(x,y,*pl,ui);
             }
         }
         if(!bombs.empty()){
-            BombState bs = bombs.front()();
+            BombState bs = bombs.front()(timeNow);
             if(bs==exploded){
                 int nOfPl=players.size();
                 for(int i=0;i<nOfPl;i++){
@@ -91,7 +95,7 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     } else if(x==-123 && y==-123){
         if(map(pl.xPos,pl.yPos)==empty && pl.currBombs<pl.maxBombs){
             map(pl.xPos,pl.yPos)=bomb;
-            bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&pl,&map);
+            bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&pl,&map,timeNow);
             map.drawQueue.push({pl.xPos,pl.yPos});
         }
     }

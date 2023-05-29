@@ -26,7 +26,9 @@ class GameMaster{
     std::map<std::string,int> config;   //Loaded config file
     std::map<std::string,char> controls;   //Loaded controls file
     Map map;    //Current map
+    PowerUpHandler powerUpHandler;
+
     std::vector<std::unique_ptr<Character>> players;
     std::queue<Bomb> bombs;     //Bombs placed on the map
-    PowerUpHandler powerUpHandler;
+    uint64_t timeNow;
 };

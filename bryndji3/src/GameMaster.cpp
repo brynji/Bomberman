@@ -15,13 +15,14 @@ void GameMaster::start(){
 
     Menu m;
     bool start;
-    map = m.main(start);
+    int numOfPlayers=2;
+    int numOfPc=0;
+    
+    map = m.main(start,numOfPlayers,numOfPc);
     if(!start){
         closeGame();
         return;
     }
-    int numOfPlayers=2;
-    int numOfPc=0;
     for(int i=0;i<numOfPlayers;i++){
         std::string pl="player"+std::to_string(i+1)+"_";
         players.emplace_back(std::make_unique<Player>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,i+10,

@@ -56,8 +56,9 @@ void GameMaster::mainLoop(){
                 moveCharacter(x,y,*pl,ui);
             }
         }
-        if(!bombs.empty()){
-            BombState bs = bombs.front()(timeNow);
+        int size=bombs.size();
+        for(int i=0;i<size;i++){
+            BombState bs = bombs[i](timeNow);
             if(bs==exploded){
                 int nOfPl=players.size();
                 for(int i=0;i<nOfPl;i++){
@@ -71,7 +72,9 @@ void GameMaster::mainLoop(){
                 }
             } 
             else if(bs==cleanedExplosion){
-                bombs.pop();
+                bombs.erase(bombs.begin()+i);
+                i--;
+                size--;
             }
         }
         if(players.size()<=1){
@@ -95,7 +98,7 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     } else if(x==-123 && y==-123){
         if(map(pl.xPos,pl.yPos)==empty && pl.currBombs<pl.maxBombs){
             map(pl.xPos,pl.yPos)=bomb;
-            bombs.emplace(pl.xPos,pl.yPos,pl.explosionSize,&pl,&map,timeNow);
+            bombs.emplace_back(pl.xPos,pl.yPos,pl.explosionSize,pl.bombDelay,&pl,&map,timeNow);
             map.drawQueue.push({pl.xPos,pl.yPos});
         }
     }

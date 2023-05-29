@@ -29,6 +29,6 @@ class GameMaster{
     PowerUpHandler powerUpHandler;
 
     std::vector<std::unique_ptr<Character>> players;
-    std::queue<Bomb> bombs;     //Bombs placed on the map
+    std::vector<Bomb> bombs;     //Bombs placed on the map
     uint64_t timeNow;
 };

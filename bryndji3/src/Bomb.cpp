@@ -1,6 +1,6 @@
 #include "Bomb.h"
 
-Bomb::Bomb(int nX, int nY, int nExplosionSize, Character * nPl, Map * nMap, const uint64_t & now) : x(nX), y(nY), explosionSize(nExplosionSize), pl(nPl), map(nMap){
+Bomb::Bomb(int nX, int nY, int nExplosionSize, int delay, Character * nPl, Map * nMap, const uint64_t & now) : x(nX), y(nY), explosionSize(nExplosionSize), pl(nPl), map(nMap){
     time = now + delay;
     pl->currBombs += 1;
 }

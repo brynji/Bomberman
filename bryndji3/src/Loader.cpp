@@ -39,6 +39,7 @@ bool Loader::loadConfig(std::map<std::string,int> & config){
     }
 
     if( config.find("biggerExplosion_chance")==config.end() ||
+        config.find("fasterExplosion_chance")==config.end() ||
         config.find("movementSpeed_chance")==config.end() ||
         config.find("moreBombs_chance")==config.end() ||
         config.find("bonusHp_chance")==config.end()   ){

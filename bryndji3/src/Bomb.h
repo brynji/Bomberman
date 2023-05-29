@@ -2,7 +2,6 @@
 #include "Map.h"
 #include "Character.h"
 
-#define delay 2000
 #define powerUpChance 40
 
 enum BombState {placed,exploded,explodedAndChecked,cleanedExplosion};
@@ -10,7 +9,7 @@ enum BombState {placed,exploded,explodedAndChecked,cleanedExplosion};
 
 class Bomb {
     public:
-    Bomb(int nX, int nY, int nExplosionSize, Character * nPl, Map * nMap, const uint64_t & now);
+    Bomb(int nX, int nY, int nExplosionSize, int delay, Character * nPl, Map * nMap, const uint64_t & now);
 
     BombState operator() (const uint64_t & now);
 

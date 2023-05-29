@@ -13,14 +13,14 @@ public:
 
     int xPos;
     int yPos;
-    int offsetX;
-    int offsetY;
+
     int color;
 
     int health = 1;
     int explosionSize = 1;
     int maxBombs = 2;
     int moveDelay = 150; 
+    int bombDelay = 2000;
     
     int currBombs = 0;
     uint64_t moveTime = 0;

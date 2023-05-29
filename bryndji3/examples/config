@@ -1,5 +1,6 @@
 / PowerUps chaces must have sum 100
-biggerExplosion_chance = 30
-moreBombs_chance = 30
-bonusHp_chance = 20
+biggerExplosion_chance = 20
+fasterExplosion_chance = 30
+moreBombs_chance = 20
+bonusHp_chance = 10
 movementSpeed_chance = 20

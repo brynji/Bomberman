@@ -3,10 +3,7 @@
 #include "Map.h"
 
 
-Map::Map(){
-    sizeX=0;
-    sizeY=0;
-}
+Map::Map(){}
 
 Map::Map(const std::string & file){
     std::ifstream mapF(file);

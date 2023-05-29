@@ -26,6 +26,6 @@ class Map{
     std::vector<gameObject> map;
     std::queue<std::pair<int,int>> playerSpawnPositions;
     std::queue<std::pair<int,int>> drawQueue;
-    int sizeX;
-    int sizeY;
+    int sizeX=0;
+    int sizeY=0;
 };

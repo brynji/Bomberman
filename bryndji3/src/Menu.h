@@ -10,7 +10,7 @@ class Menu{
     Map main(bool & start);
 
     //load all maps from path 'mapDir'
-    void loadMaps();
+    bool loadMaps();
 
     const std::string mapDir = "examples/maps";
     std::vector<Map> maps;

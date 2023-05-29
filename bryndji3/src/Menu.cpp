@@ -68,6 +68,8 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi){
         mvprintw(5,5,"Enter number of ai opponents:  ");
         numberOfAi=getch()-48;
         if(numberOfAi<0 || numberOfPlayers+numberOfAi>4){
+            mvprintw(5,5,"                                ");
+            mvprintw(3,5,"                                ");
             continue;
         }
         break;

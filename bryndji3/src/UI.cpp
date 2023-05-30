@@ -5,6 +5,7 @@ UI::UI(Map * nMap){
     initscr();
     int x=0, y=0;
     addstr("Terminal size is too small.");
+    ///Calculate size of terminal needed for map and UI
     while(x<(map->sizeX*xMultiplier+winXOffset+2+xUISize) || y<(map->sizeY*yMultiplier)+winYOffset+2+yUISize){
         getmaxyx(stdscr,y,x);
         refresh();
@@ -13,7 +14,7 @@ UI::UI(Map * nMap){
     curs_set(0);
     noecho();
 
-    //definice párů barev
+    ///color pairs definitions
     init_pair(1,COLOR_WHITE,COLOR_BLACK);   //DEFAULT
     init_pair(2,COLOR_WHITE,COLOR_WHITE);   //WALL
     init_pair(3,COLOR_BLUE,COLOR_BLACK);    //CRATE
@@ -33,19 +34,20 @@ UI::~UI(){
 
 //--------------------------------------------------------------------------------------------------
 
-void UI::start(std::vector<std::unique_ptr<Character>> & players){
+void UI::start(const std::vector<std::unique_ptr<Character>> & players){
     clear();
     win = newwin((map->sizeY)*3+2,(map->sizeX)*5+2,winYOffset,winXOffset);
     nodelay(win, TRUE);
     keypad(win,true);
     box(win,0,0);
 
+    ///Print players names
     for(uint i=0;i<players.size();i++){
         mvaddstr(winYOffset+6*i+1,4+winXOffset+map->sizeX*xMultiplier,players[i]->name.c_str());
     }
     mvaddstr(winYOffset+map->sizeY*yMultiplier+3,5,"Press Esc to quit to main menu");
     refresh();
-    //print map
+    ///Print map
     for(int i=0;i<map->sizeY;i++){
         for(int j=0;j<map->sizeX;j++){
             redraw(j,i);
@@ -80,13 +82,15 @@ void UI::drawCharacter(int x, int y, int colorPair){
 
 //--------------------------------------------------------------------------------------------------
 
-void UI::draw(int x, int y, std::string ch [], int colorPair){
+void UI::draw(int x, int y, std::string icon [], int colorPair){
     wattron(win,COLOR_PAIR(colorPair));
     for(int i=0;i<yMultiplier;i++){
-        mvwaddstr (win, yMultiplier*(y)+i+1, xMultiplier*(x)+1, ch[i].c_str());
+        mvwaddstr (win, yMultiplier*(y)+i+1, xMultiplier*(x)+1, icon[i].c_str());
     }
     wattroff(win,COLOR_PAIR(colorPair));
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void UI::redraw(int x, int y){
     gameObject go=(*map)(x,y);

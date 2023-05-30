@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <map>
 #include <memory>
@@ -29,7 +30,6 @@ class GameMaster{
     std::map<std::string,char> controls;   //Loaded controls file
     Map map;    //Current map
     PowerUpHandler powerUpHandler;
-
     std::vector<std::unique_ptr<Character>> players;
     std::vector<Bomb> bombs;     //Bombs placed on the map
     uint64_t timeNow;

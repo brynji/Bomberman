@@ -6,6 +6,7 @@
 Enemy::Enemy(int x, int y, int color, int health, int explosionSize, int maxBombs, int moveDelay, int bombDelay, Map * nMap,std::vector<std::unique_ptr<Character>> * nPlayers):
     Character(x,y,color,health,explosionSize,maxBombs,moveDelay+200,bombDelay,"Player"), map(nMap), players(nPlayers){}
 
+//--------------------------------------------------------------------------------------------------
 
 bool Enemy::input(int in,const uint64_t now, int & xOut, int & yOut){
     if(moveTime>now){
@@ -49,6 +50,8 @@ bool Enemy::input(int in,const uint64_t now, int & xOut, int & yOut){
     return false;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Enemy::isValid(int x, int y){
     if(x<0 || x>=map->sizeX || y<0 || y>=map->sizeY){
         return false;
@@ -56,9 +59,13 @@ bool Enemy::isValid(int x, int y){
     return true;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Enemy::canMoveOn(int x, int y, gameObject go){
     return (isValid(x,y) && ((*map)(x,y)==empty || (*map)(x,y)==powerup || (*map)(x,y)==go));
 }
+
+//--------------------------------------------------------------------------------------------------
 
 bool Enemy::findPath (std::vector<Point> & path, gameObject destination, int xDest, int yDest){
     std::queue<Point> q;
@@ -105,6 +112,8 @@ bool Enemy::findPath (std::vector<Point> & path, gameObject destination, int xDe
     return true;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Enemy::inDangerRec(int x, int y, int xAdd, int yAdd, int i){
     if(i>=4 || !isValid(x+i*xAdd,y+i*yAdd)){
         return false;
@@ -117,6 +126,8 @@ bool Enemy::inDangerRec(int x, int y, int xAdd, int yAdd, int i){
     }
     return inDangerRec(x,y,xAdd,yAdd,i+1);
 }
+
+//--------------------------------------------------------------------------------------------------
 
 bool Enemy::inDanger(int x, int y, int & xOut, int & yOut){
     if((*map)(xPos,yPos)==bomb){
@@ -134,6 +145,8 @@ bool Enemy::inDanger(int x, int y, int & xOut, int & yOut){
     }
     return true;
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void Enemy::runFrom(int x, int y, int & xOut, int & yOut){
     xOut=xPos;

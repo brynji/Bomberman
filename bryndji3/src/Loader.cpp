@@ -34,6 +34,8 @@ bool Loader::load(std::map<std::string,T> & config, const std::string & target,c
     return true;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Loader::loadConfig(std::map<std::string,int> & config){
     if(!load<int>(config,"examples/config","config")){
         return false;
@@ -54,6 +56,8 @@ bool Loader::loadConfig(std::map<std::string,int> & config){
     }
     return true;
 }
+
+//--------------------------------------------------------------------------------------------------
 
 bool Loader::loadControls(std::map<std::string,char> & config){
     if(!load<char>(config,"examples/controls","controls")){
@@ -85,6 +89,8 @@ bool Loader::loadControls(std::map<std::string,char> & config){
     return true;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Loader::loadMaps(std::vector<Map> & maps){
     try{
         const std::filesystem::path dir ("examples/maps");  
@@ -107,6 +113,8 @@ bool Loader::loadMaps(std::vector<Map> & maps){
     return true;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Loader::loadLeaderboard(std::vector<std::string> & vec){
     std::ifstream leaderboard(leaderboardPath);
     if(!leaderboard.good()){
@@ -119,6 +127,8 @@ bool Loader::loadLeaderboard(std::vector<std::string> & vec){
     }
     return true;
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void Loader::updateLeaderboard(std::string name){
     std::vector<std::string> leaders;

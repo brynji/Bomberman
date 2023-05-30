@@ -5,6 +5,8 @@ Bomb::Bomb(int nX, int nY, int nExplosionSize, int delay, Character * nPl, Map *
     pl->currBombs += 1;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 BombState Bomb::operator() (const uint64_t & now){
     if(bombState==exploded) bombState=explodedAndChecked;
     if(now>=time){
@@ -20,6 +22,8 @@ BombState Bomb::operator() (const uint64_t & now){
     }
     return bombState;
 }
+
+//--------------------------------------------------------------------------------------------------
 
 bool Bomb::explosionBehaviour(int x, int y){
     if(x<0 || x>=map->sizeX || y<0 || y>=map->sizeY){
@@ -45,6 +49,8 @@ bool Bomb::explosionBehaviour(int x, int y){
     return true;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 void Bomb::ExplodeRec(int xAdd, int yAdd, int i, int depth){
     if(i==depth) return;
     if(explosionBehaviour(x+(xAdd*i),y+(yAdd*i))){
@@ -52,6 +58,8 @@ void Bomb::ExplodeRec(int xAdd, int yAdd, int i, int depth){
     }
     return;
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void Bomb::Explode(){
     (*map)(x,y)=explosion;
@@ -61,6 +69,8 @@ void Bomb::Explode(){
     ExplodeRec(0,-1,1,explosionSize+1);
     ExplodeRec(0,1,1,explosionSize+1);
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void Bomb::CleanRec(int xAdd, int yAdd, int i, int depth){
     int currX = x+(xAdd*i);
@@ -76,6 +86,8 @@ void Bomb::CleanRec(int xAdd, int yAdd, int i, int depth){
     }
     return;
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void Bomb::Clean(){
     CleanRec(-1,0,0,explosionSize+1);

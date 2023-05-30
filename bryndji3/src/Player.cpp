@@ -10,6 +10,8 @@ Player::Player(int x, int y, int color,int up, int down, int left, int right, in
     keyBomb=bomb;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 bool Player::input(int in, const uint64_t now, int& xOut, int& yOut){
     if(in==keyBomb){
         xOut=-123;

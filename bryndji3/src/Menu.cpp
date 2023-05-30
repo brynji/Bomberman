@@ -35,6 +35,8 @@ int Menu::drawMenu(int x, int y, const std::vector<std::string> & options){
     return selected;
 }
 
+//--------------------------------------------------------------------------------------------------
+
 void Menu::showLeaderboard(){
     std::vector<std::string> leaders;
     if(!loader.loadLeaderboard(leaders)){
@@ -52,18 +54,21 @@ void Menu::showLeaderboard(){
     getch();
 }
 
+//--------------------------------------------------------------------------------------------------
+
 Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vector<std::string> & names){
     if(!loader.loadMaps(maps)){
         start=false;
         return Map();
     }
-    std::vector<std::string> mainOptions = {"Start","Leaderboard","Quit"};
     initscr();
     keypad(stdscr,true);
     curs_set(0);
     noecho();
     start_color();
     init_pair(1,COLOR_RED,COLOR_BLACK);
+
+    std::vector<std::string> mainOptions = {"Start","Leaderboard","Quit"};
     mvprintw(1,5,"Bomberman");
     int selected = drawMenu(2,3,mainOptions);
     clear();
@@ -77,7 +82,6 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
         clear();
         return main(start,numberOfPlayers,numberOfAi,names);
     }
-
 
     mvaddstr(0,3,"Number of players must be between 1 and 4.");
     mvaddstr(1,3,"Sum of players and Ai opponents cannot be more than 4.");
@@ -97,6 +101,7 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
         }
         break;
     }
+
     clear();
     echo();
     for(int i=1;i<=numberOfPlayers;i++){
@@ -120,6 +125,7 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
         names.push_back(name);
         clear();
     }
+    noecho();
     endwin();
     start=true;
     return maps.at(0);

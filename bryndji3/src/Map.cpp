@@ -5,6 +5,8 @@
 
 Map::Map(){}
 
+//--------------------------------------------------------------------------------------------------
+
 Map::Map(const std::string & file){
     std::ifstream mapF(file);
     if(!mapF.good()){
@@ -39,6 +41,8 @@ Map::Map(const std::string & file){
         }
     }
 }
+
+//--------------------------------------------------------------------------------------------------
 
 gameObject & Map::operator () (int x, int y){
     return map.at((y*sizeX)+x);

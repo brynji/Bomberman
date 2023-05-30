@@ -9,10 +9,15 @@
 void GameMaster::start(){
     Loader l;
     if(config.size()==0){
-        if(!l.loadConfig(config) || !l.loadControls(controls)){
+        try{
+            if(!l.loadConfig(config) || !l.loadControls(controls)){
+                return;
+            }
+            powerUpHandler.addConfig(config);
+        } catch(...){
+            std::cout<<"Error with config or controls file."<<std::endl;
             return;
         }
-        powerUpHandler.addConfig(config);
     }
 
     Menu m;
@@ -20,8 +25,12 @@ void GameMaster::start(){
     int numOfPlayers=2;
     int numOfPc=0;
     std::vector<std::string> names;
-
-    map = m.main(startGame,numOfPlayers,numOfPc,names);
+    try{
+        map = m.main(startGame,numOfPlayers,numOfPc,names);
+    } catch(...){
+        std::cout<<"Error in main menu."<<std::endl;
+        return;
+    }
     if(!startGame){
         closeGame();
         return;
@@ -53,6 +62,8 @@ void GameMaster::start(){
     reset();
     return start();
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void GameMaster::mainLoop(){
     UI ui=(&map);
@@ -105,6 +116,8 @@ void GameMaster::mainLoop(){
     }    
 }
 
+//--------------------------------------------------------------------------------------------------
+
 void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
     if(x>=0 && x<map.sizeX && y>=0 && y<map.sizeY && map(x,y)>2){
         map.drawQueue.push({pl.xPos,pl.yPos});
@@ -127,6 +140,8 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
         }
     }
 }
+
+//--------------------------------------------------------------------------------------------------
 
 void GameMaster::reset(){
     players.clear();

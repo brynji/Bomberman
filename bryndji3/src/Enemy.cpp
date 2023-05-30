@@ -52,7 +52,7 @@ bool Enemy::input(int in,const uint64_t now, int & xOut, int & yOut){
 
 //--------------------------------------------------------------------------------------------------
 
-bool Enemy::isValid(int x, int y){
+bool Enemy::isValid(int x, int y)const{
     if(x<0 || x>=map->sizeX || y<0 || y>=map->sizeY){
         return false;
     }
@@ -61,13 +61,13 @@ bool Enemy::isValid(int x, int y){
 
 //--------------------------------------------------------------------------------------------------
 
-bool Enemy::canMoveOn(int x, int y, gameObject go){
+bool Enemy::canMoveOn(int x, int y, gameObject go)const{
     return (isValid(x,y) && ((*map)(x,y)==empty || (*map)(x,y)==powerup || (*map)(x,y)==go));
 }
 
 //--------------------------------------------------------------------------------------------------
 
-bool Enemy::findPath (std::vector<Point> & path, gameObject destination, int xDest, int yDest){
+bool Enemy::findPath (std::vector<Point> & path, gameObject destination, int xDest, int yDest)const{
     std::queue<Point> q;
     std::set<Point> visited;
 
@@ -114,7 +114,7 @@ bool Enemy::findPath (std::vector<Point> & path, gameObject destination, int xDe
 
 //--------------------------------------------------------------------------------------------------
 
-bool Enemy::inDangerRec(int x, int y, int xAdd, int yAdd, int i){
+bool Enemy::inDangerRec(int x, int y, int xAdd, int yAdd, int i)const{
     if(i>=4 || !isValid(x+i*xAdd,y+i*yAdd)){
         return false;
     }
@@ -129,7 +129,7 @@ bool Enemy::inDangerRec(int x, int y, int xAdd, int yAdd, int i){
 
 //--------------------------------------------------------------------------------------------------
 
-bool Enemy::inDanger(int x, int y, int & xOut, int & yOut){
+bool Enemy::inDanger(int x, int y, int & xOut, int & yOut)const{
     if((*map)(xPos,yPos)==bomb){
         runFrom(0,0,xOut,yOut);
     } else if(inDangerRec(x,y,1,0,1)){
@@ -148,7 +148,7 @@ bool Enemy::inDanger(int x, int y, int & xOut, int & yOut){
 
 //--------------------------------------------------------------------------------------------------
 
-void Enemy::runFrom(int x, int y, int & xOut, int & yOut){
+void Enemy::runFrom(int x, int y, int & xOut, int & yOut)const{
     xOut=xPos;
     yOut=yPos;
     if(x==0){

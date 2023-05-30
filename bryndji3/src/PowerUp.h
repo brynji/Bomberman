@@ -12,5 +12,5 @@ public:
      * @param pl player who picked up powerUp
      * @return name of the powerUp for UI to draw
      */
-    virtual std::string pickUp (Character & pl)=0;
+    virtual std::string pickUp (Character & pl)const=0;
 };

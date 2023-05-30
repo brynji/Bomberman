@@ -22,7 +22,7 @@ public:
      * @param pl Player who should receive the powerUp
      * @return name of the powerUp for UI to print
      */
-    std::string pickUp(Character & pl);
+    std::string pickUp(Character & pl)const;
 private:
     ///Vector with instances of every powerUp and their % chance of getting picked up
     std::vector<std::pair<std::unique_ptr<PowerUp>,int>> powerUps;

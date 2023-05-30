@@ -4,7 +4,7 @@
 
 #include "Menu.h"
 
-int Menu::drawMenu(int x, int y, const std::vector<std::string> & options){
+int Menu::drawMenu(int x, int y, const std::vector<std::string> & options)const{
     uint selected = 0;
     int in;
     while(true){

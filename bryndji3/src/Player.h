@@ -33,7 +33,7 @@ public:
      * @param yOut coordinate that player wants to go to
      * @return signalize if player wants to move or not
      */
-    bool input(int in, const uint64_t now, int& xOut, int& yOut) override;
+    bool input(int in, const uint64_t now, int& xOut, int& yOut)override;
 
 private:
     ///Keys used to control this character

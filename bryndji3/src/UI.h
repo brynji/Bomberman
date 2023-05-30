@@ -80,7 +80,7 @@ public:
      * @param icon string array which will be printed to the screen
      * @param colorPair color of drawn object
      */
-    void draw(int x, int y, std::string icon [], int colorPair);
+    void draw(int x, int y, const std::string icon [], int colorPair);
 
     /**
      * Redraw all tiles of the map from drawQueue
@@ -100,11 +100,11 @@ WINDOW * win;
 Map * map;
 
 ///Icons of gameObjects
-std::string wallIcon    [yMultiplier] = {"     ","     ","     "};
-std::string crateIcon   [yMultiplier] = {"xxxxx","xxxxx","xxxxx"};
-std::string emptyIcon   [yMultiplier] = {"     ","     ","     "};
-std::string powerUpIcon [yMultiplier] = {" ___ ","/ ? \\","-----"};
-std::string bombIcon    [yMultiplier] = {" \\ / ","--O--"," / \\ "};
-std::string explosionIcon    [yMultiplier] = {"     ","     ","     "};
-std::string characterIcon [yCharacterSize] = {"ooo","ooo"}; 
+const std::string wallIcon    [yMultiplier] = {"     ","     ","     "};
+const std::string crateIcon   [yMultiplier] = {"xxxxx","xxxxx","xxxxx"};
+const std::string emptyIcon   [yMultiplier] = {"     ","     ","     "};
+const std::string powerUpIcon [yMultiplier] = {" ___ ","/ ? \\","-----"};
+const std::string bombIcon    [yMultiplier] = {" \\ / ","--O--"," / \\ "};
+const std::string explosionIcon    [yMultiplier] = {"     ","     ","     "};
+const std::string characterIcon [yCharacterSize] = {"ooo","ooo"}; 
 };

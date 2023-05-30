@@ -16,7 +16,7 @@ void PowerUpHandler::addConfig(std::map<std::string,int> & config){
 
 //--------------------------------------------------------------------------------------------------
 
-std::string PowerUpHandler::pickUp(Character & pl){
+std::string PowerUpHandler::pickUp(Character & pl)const{
     int rnd=rand()%100;
     int num=0;
     for(uint i=0;i<powerUps.size();i++){

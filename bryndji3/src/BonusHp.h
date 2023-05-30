@@ -6,5 +6,5 @@ class BonusHp : public PowerUp {
      * @param pl player which should receive powerUp
      * @return name of this powerUp for UI to print
      */
-    std::string pickUp(Character & pl) override;
+    std::string pickUp(Character & pl)const override;
 };

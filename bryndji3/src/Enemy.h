@@ -25,17 +25,17 @@ public:
     bool input(int in, const uint64_t now, int& xOut, int& yOut) override;
 
 private:
-    bool findPath (std::vector<Point> & path,gameObject destination,int xDest=-1, int yDest=-1);
+    bool isValid( int x, int y)const;
 
-    bool inDangerRec(int x, int y,int xAdd, int yAdd, int i);
+    bool canMoveOn(int x, int y, gameObject go=empty)const;
 
-    bool inDanger(int x, int y, int & xOut, int & yOut);
+    bool findPath (std::vector<Point> & path,gameObject destination,int xDest=-1, int yDest=-1)const;
 
-    void runFrom(int x, int y, int & xOut, int & yOut);
+    bool inDangerRec(int x, int y,int xAdd, int yAdd, int i)const;
 
-    bool canMoveOn(int x, int y, gameObject go=empty);
+    bool inDanger(int x, int y, int & xOut, int & yOut)const;
 
-    bool isValid(int x, int y);
+    void runFrom(int x, int y, int & xOut, int & yOut)const;
 
     Map * map;
     std::vector<std::unique_ptr<Character>> * players;

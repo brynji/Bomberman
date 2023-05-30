@@ -82,7 +82,7 @@ void UI::drawCharacter(int x, int y, int colorPair){
 
 //--------------------------------------------------------------------------------------------------
 
-void UI::draw(int x, int y, std::string icon [], int colorPair){
+void UI::draw(int x, int y, const std::string icon [], int colorPair){
     wattron(win,COLOR_PAIR(colorPair));
     for(int i=0;i<yMultiplier;i++){
         mvwaddstr (win, yMultiplier*(y)+i+1, xMultiplier*(x)+1, icon[i].c_str());

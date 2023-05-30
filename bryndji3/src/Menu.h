@@ -29,7 +29,7 @@ private:
      * @param options vector of options user can choose from
      * @return position of selected option in the options vector
      */
-    int drawMenu(int x, int y, const std::vector<std::string> & options);
+    int drawMenu(int x, int y, const std::vector<std::string> & options)const;
 
     /**
      * Shows leaderboard

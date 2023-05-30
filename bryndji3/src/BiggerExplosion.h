@@ -2,5 +2,5 @@
 
 class BiggerExplosion : public PowerUp {
 
-    std::string pickUp(Character & pl) override;
+    std::string pickUp(Character & pl)const override;
 };

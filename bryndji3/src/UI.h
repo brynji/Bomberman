@@ -6,19 +6,19 @@
 #include "Map.h"
 #include "Character.h"
 
-//Spaces between map and left and top edges of terminal
+///Spaces between map and left and top edges of terminal
 #define winXOffset 2
 #define winYOffset 5
-//Spaces below and on the right of the map, needed for names of players
+///Spaces below and on the right of the map, needed for names of players
 #define xUISize 22
 #define yUISize 3
-//Number of characters representing one tile on the map
+///Number of characters representing one tile on the map
 #define xMultiplier 5
 #define yMultiplier 3
-//Number of characters representing playable character
+///Number of characters representing playable character
 #define xCharacterSize 3
 #define yCharacterSize 2
-//Colors, defined for better readability
+///Colors, defined for better readability
 #define powerUpColor 1
 #define emptyColor 1
 #define wallColor 2
@@ -93,9 +93,13 @@ public:
      */
     void endScreen(const std::string & winner);
 
+private:
+///Window with drawn map
 WINDOW * win;
+///Map that is currently played
 Map * map;
 
+///Icons of gameObjects
 std::string wallIcon    [yMultiplier] = {"     ","     ","     "};
 std::string crateIcon   [yMultiplier] = {"xxxxx","xxxxx","xxxxx"};
 std::string emptyIcon   [yMultiplier] = {"     ","     ","     "};

@@ -13,6 +13,7 @@ public:
 
     bool hit();
 
+
     int xPos;
     int yPos;
 
@@ -24,7 +25,9 @@ public:
     int maxBombs;
     int moveDelay; 
     int bombDelay;
-    
+
     int currBombs = 0;
+
+protected:
     uint64_t moveTime = 0;
 };

@@ -8,11 +8,12 @@ enum BombState {placed,exploded,explodedAndChecked,cleanedExplosion};
 
 
 class Bomb {
-    public:
+public:
     Bomb(int nX, int nY, int nExplosionSize, int delay, Character * nPl, Map * nMap, const uint64_t & now);
 
     BombState operator() (const uint64_t & now);
 
+private:
     bool explosionBehaviour(int x, int y);
     void ExplodeRec(int xAdd, int yAdd, int i, int depth);
     void Explode();

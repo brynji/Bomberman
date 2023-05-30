@@ -35,6 +35,8 @@ public:
      */
     bool input(int in, const uint64_t now, int& xOut, int& yOut) override;
 
+private:
+    ///Keys used to control this character
     int keyLeft;
     int keyRight;
     int keyUp;

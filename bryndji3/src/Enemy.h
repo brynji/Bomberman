@@ -24,7 +24,7 @@ public:
 
     bool input(int in, const uint64_t now, int& xOut, int& yOut) override;
 
-    private:
+private:
     bool findPath (std::vector<Point> & path,gameObject destination,int xDest=-1, int yDest=-1);
 
     bool inDangerRec(int x, int y,int xAdd, int yAdd, int i);

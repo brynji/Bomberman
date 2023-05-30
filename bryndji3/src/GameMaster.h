@@ -12,10 +12,11 @@
 #include "PowerUpHandler.h"
 
 class GameMaster{
-    public:
+public:
     //Start game - load config, load powerups, go to main menu, quit or start a new game
     void start();
 
+private:
     //Main game loop - read input, move players, refresh screen
     void mainLoop();
 

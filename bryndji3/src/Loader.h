@@ -7,7 +7,7 @@
 #include "Map.h"
 
 class Loader {
-    public:
+public:
 
     template<typename T>
     bool load(std::map<std::string,T> & config, const std::string & target, const std::string & fileName);
@@ -23,5 +23,12 @@ class Loader {
 
     void updateLeaderboard(std::string name);
 
+private:
     const std::string leaderboardPath = "examples/.leaderboard";
+
+    const std::string mapPath = "examples/maps";
+
+    const std::string configPath = "examples/config";
+
+    const std::string controlsPath = "examples/controls";
 };

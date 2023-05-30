@@ -37,7 +37,7 @@ bool Loader::load(std::map<std::string,T> & config, const std::string & target,c
 //--------------------------------------------------------------------------------------------------
 
 bool Loader::loadConfig(std::map<std::string,int> & config){
-    if(!load<int>(config,"examples/config","config")){
+    if(!load<int>(config,configPath,"config")){
         return false;
     }
 
@@ -60,7 +60,7 @@ bool Loader::loadConfig(std::map<std::string,int> & config){
 //--------------------------------------------------------------------------------------------------
 
 bool Loader::loadControls(std::map<std::string,char> & config){
-    if(!load<char>(config,"examples/controls","controls")){
+    if(!load<char>(config,controlsPath,"controls")){
         return false;
     }
     if(     config.find("player1_up")==config.end()     ||
@@ -93,7 +93,7 @@ bool Loader::loadControls(std::map<std::string,char> & config){
 
 bool Loader::loadMaps(std::vector<Map> & maps){
     try{
-        const std::filesystem::path dir ("examples/maps");  
+        const std::filesystem::path dir (mapPath);  
         for(const auto & x : std::filesystem::directory_iterator(dir)){
             maps.emplace_back(Map(x.path()));
             if(maps.back().sizeX<=0 || maps.back().sizeY<=0 || maps.back().playerSpawnPositions.size()<4){
@@ -103,7 +103,7 @@ bool Loader::loadMaps(std::vector<Map> & maps){
             }
         }
     } catch (...){
-        std::cout<<"Path \"examples/maps\" does not exist."<<std::endl;
+        std::cout<<"Path \""<<mapPath<<"\" does not exist."<<std::endl;
         return false;
     }
     if(maps.size()<1){

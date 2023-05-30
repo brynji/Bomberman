@@ -81,7 +81,7 @@ void Bomb::CleanRec(int xAdd, int yAdd, int i, int depth){
         (*map)(currX,currY)=empty;
         map->drawQueue.push({currX,currY});
         CleanRec(xAdd,yAdd,i+1,depth);
-    } else if (go==powerup || go==bomb){
+    } else if (go==powerup || go==bomb || go==empty){
         CleanRec(xAdd,yAdd,i+1,depth);
     }
     return;

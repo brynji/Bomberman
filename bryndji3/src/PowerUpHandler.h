@@ -10,7 +10,7 @@
 
 ///Chooses which powerUps should be picked up
 class PowerUpHandler {
-    public:
+public:
     /**
      * Reads settings from configuration file and uses them
      * @param config map with settins
@@ -23,6 +23,7 @@ class PowerUpHandler {
      * @return name of the powerUp for UI to print
      */
     std::string pickUp(Character & pl);
-
+private:
+    ///Vector with instances of every powerUp and their % chance of getting picked up
     std::vector<std::pair<std::unique_ptr<PowerUp>,int>> powerUps;
 };

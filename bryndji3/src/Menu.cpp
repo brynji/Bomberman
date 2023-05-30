@@ -1,6 +1,5 @@
 #include <iostream>
 #include <ncurses.h>
-#include <string>
 #include <vector>
 
 #include "Menu.h"
@@ -67,7 +66,7 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
     noecho();
     start_color();
     init_pair(1,COLOR_RED,COLOR_BLACK);
-
+    //Main menu
     std::vector<std::string> mainOptions = {"Start","Leaderboard","Quit"};
     mvprintw(1,5,"Bomberman");
     int selected = drawMenu(2,3,mainOptions);
@@ -82,7 +81,7 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
         clear();
         return main(start,numberOfPlayers,numberOfAi,names);
     }
-
+    //Parameters of the game
     mvaddstr(0,3,"Number of players must be between 1 and 4.");
     mvaddstr(1,3,"Sum of players and Ai opponents cannot be more than 4.");
     while(true){
@@ -101,8 +100,8 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
         }
         break;
     }
-
     clear();
+    //Names of players
     echo();
     for(int i=1;i<=numberOfPlayers;i++){
         mvaddstr(0,3,("Enter name of Player"+std::to_string(i)+": ").c_str());

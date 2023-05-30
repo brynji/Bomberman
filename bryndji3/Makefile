@@ -19,6 +19,9 @@ clean:
 	rm -rf src/*.o
 	rm -rf bryndji3
 
+doc:
+	doxygen Doxyfile
+
 deps:
 	$(CXX) -MM src/*.cpp > Makefile.d
 

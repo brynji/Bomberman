@@ -131,5 +131,8 @@ void UI::endScreen(const std::string & winner){
     } else {
         mvaddstr(2,2,(winner+" has won the game!").c_str());
     }
-    getch();
+    char ch=' ';
+    while(ch!='\n'){
+        ch=getch();
+    }
 }

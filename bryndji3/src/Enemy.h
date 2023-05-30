@@ -24,18 +24,20 @@ public:
     bool input(int in, const uint64_t now, int& xOut, int& yOut) override;
 
     private:
-    bool findPath (Point & path,gameObject destination);
+    bool findPath (std::vector<Point> & path,gameObject destination,int xDest=-1, int yDest=-1);
 
-    bool inDangerRec(int x, int y, int xAdd, int yAdd, int i);
+    bool inDangerRec(int x, int y,int xAdd, int yAdd, int i);
 
     bool inDanger(int x, int y, int & xOut, int & yOut);
 
     void runFrom(int x, int y, int & xOut, int & yOut);
 
-    bool canMoveOn(int x, int y, gameObject=empty);
+    bool canMoveOn(int x, int y, gameObject go=empty);
 
     bool isValid(int x, int y);
 
     Map * map;
     std::vector<std::unique_ptr<Character>> * players;
+    bool targetPlayer = false;
+    int bombsUntilTargetSwitch=3;
 };

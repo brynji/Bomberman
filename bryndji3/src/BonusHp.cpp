@@ -1,5 +1,6 @@
 #include "BonusHp.h"
 
-void BonusHp::pickUp(Character & pl){
+std::string BonusHp::pickUp(Character & pl){
     pl.health+=1;
+    return "bonus health";
 }

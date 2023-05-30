@@ -5,7 +5,7 @@ UI::UI(Map * nMap){
     initscr();
     int x=0, y=0;
     addstr("Terminal size is too small.");
-    while(x<(map->sizeX*xMultiplier+winYOffset+2) || y<(map->sizeY*yMultiplier)+winXOffset+2){
+    while(x<(map->sizeX*xMultiplier+winXOffset+2+xUISize) || y<(map->sizeY*yMultiplier)+winYOffset+2+yUISize){
         getmaxyx(stdscr,y,x);
         refresh();
     }
@@ -23,6 +23,7 @@ UI::UI(Map * nMap){
     init_pair(11,COLOR_CYAN,COLOR_BLACK);   //PLAYER2
     init_pair(12,COLOR_YELLOW,COLOR_BLACK);   //PLAYER3
     init_pair(13,COLOR_GREEN,COLOR_BLACK);   //PLAYER4
+    init_pair(20,COLOR_RED,COLOR_BLACK);    //DEAD PLAYER NAMES
 }
 
 UI::~UI(){
@@ -42,6 +43,7 @@ void UI::start(std::vector<std::unique_ptr<Character>> & players){
     for(uint i=0;i<players.size();i++){
         mvaddstr(winYOffset+6*i+1,4+winXOffset+map->sizeX*xMultiplier,players[i]->name.c_str());
     }
+    mvaddstr(winYOffset+map->sizeY*yMultiplier+3,5,"Press Esc to quit to main menu");
     refresh();
     //print map
     for(int i=0;i<map->sizeY;i++){
@@ -50,6 +52,14 @@ void UI::start(std::vector<std::unique_ptr<Character>> & players){
         }
     }
     wrefresh(win);
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void UI::updateBonus(const Character & pl, const std::string & bonus){
+    mvaddstr(2,2,"                                                                                                     ");
+    mvaddstr(2,2,(pl.name+" picked up "+bonus).c_str());
+    refresh();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -110,4 +120,16 @@ void UI::update(){
         redraw(map->drawQueue.front().first,map->drawQueue.front().second);
         map->drawQueue.pop();
     }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void UI::endScreen(const std::string & winner){
+    clear();
+    if(winner==""){
+        mvaddstr(2,2,"Nobody has won the game :(");
+    } else {
+        mvaddstr(2,2,(winner+" has won the game!").c_str());
+    }
+    getch();
 }

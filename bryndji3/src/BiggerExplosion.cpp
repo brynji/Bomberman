@@ -1,5 +1,6 @@
 #include "BiggerExplosion.h"
 
-void BiggerExplosion::pickUp(Character & pl){
+std::string BiggerExplosion::pickUp(Character & pl){
     pl.explosionSize+=1;
+    return "bigger explosion";
 }

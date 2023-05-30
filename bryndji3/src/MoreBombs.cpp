@@ -1,5 +1,6 @@
 #include "MoreBombs.h"
 
-void MoreBombs::pickUp(Character & pl){
+std::string MoreBombs::pickUp(Character & pl){
     pl.maxBombs+=1;
+    return "more bombs";
 }

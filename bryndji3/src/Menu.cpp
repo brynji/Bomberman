@@ -110,7 +110,13 @@ Map Menu::main(bool & start, int & numberOfPlayers, int & numberOfAi, std::vecto
         if(name.length()==0){
             i--;
             continue;
-        } 
+        } else if(name.length()>20){
+            mvaddstr(3,3,"Name cannot be longer than 20 characters!");
+            getch();
+            clear();
+            i--;
+            continue;
+        }
         names.push_back(name);
         clear();
     }

@@ -16,7 +16,7 @@ void PowerUpHandler::addConfig(std::map<std::string,int> & config){
     powerUps.emplace_back(std::make_unique<MovementSpeed>(),config.find("movementSpeed_chance")->second);
 }
 
-void PowerUpHandler::pickUp(Character & pl){
+std::string PowerUpHandler::pickUp(Character & pl){
     int rnd=rand()%100;
     int num=0;
     for(uint i=0;i<powerUps.size();i++){
@@ -25,4 +25,5 @@ void PowerUpHandler::pickUp(Character & pl){
             return powerUps[i].first->pickUp(pl);
         }
     }
+    return "";
 }

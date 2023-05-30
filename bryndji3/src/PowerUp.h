@@ -6,5 +6,5 @@ class PowerUp{
     public:
     virtual ~PowerUp()=default;
 
-    virtual void pickUp (Character & pl)=0;
+    virtual std::string pickUp (Character & pl)=0;
 };

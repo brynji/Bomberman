@@ -8,6 +8,8 @@
 
 #define winXOffset 2
 #define winYOffset 5
+#define xUISize 22
+#define yUISize 3
 
 #define xMultiplier 5
 #define yMultiplier 3
@@ -37,6 +39,8 @@ public:
     //start of the game - draw map, show players and health
     void start(std::vector<std::unique_ptr<Character>> & players);
 
+    void updateBonus(const Character & pl, const std::string & bonus);
+
     int getInput();
 
     //Used for drawing characters
@@ -47,6 +51,8 @@ public:
     void draw(int x, int y, std::string ch [], int colorPair);
 
     void update();
+
+    void endScreen(const std::string & winner);
 
 WINDOW * win;
 Map * map;

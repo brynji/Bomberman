@@ -108,7 +108,7 @@ bool Loader::loadMaps(std::vector<Map> & maps){
 }
 
 bool Loader::loadLeaderboard(std::vector<std::string> & vec){
-    std::ifstream leaderboard("examples/.leaderboard");
+    std::ifstream leaderboard(leaderboardPath);
     if(!leaderboard.good()){
         return false;
     }
@@ -118,4 +118,20 @@ bool Loader::loadLeaderboard(std::vector<std::string> & vec){
         vec.push_back(line);
     }
     return true;
+}
+
+void Loader::updateLeaderboard(std::string name){
+    std::vector<std::string> leaders;
+    if(!loadLeaderboard(leaders)){
+        return;
+    }
+    std::fstream delLeader(leaderboardPath, std::fstream::out | std::fstream::trunc);
+    delLeader.close();
+
+    std::ofstream newLeader(leaderboardPath);
+    newLeader<<name+'\n';
+    for(std::string & x : leaders){
+        newLeader<<x+'\n';
+    }
+    newLeader.close();
 }

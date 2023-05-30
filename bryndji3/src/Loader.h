@@ -19,4 +19,8 @@ class Loader {
     bool loadMaps(std::vector<Map> & vec);
 
     bool loadLeaderboard(std::vector<std::string> & vec);
+
+    void updateLeaderboard(std::string name);
+
+    const std::string leaderboardPath = "examples/.leaderboard";
 };

@@ -1,5 +1,6 @@
 #include "FasterExplosion.h"
 
-void FasterExplosion::pickUp(Character & pl){
+std::string FasterExplosion::pickUp(Character & pl){
     pl.bombDelay*=0.8;
+    return "faster explosion";
 }

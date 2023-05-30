@@ -7,8 +7,8 @@
 
 
 void GameMaster::start(){
+    Loader l;
     if(config.size()==0){
-        Loader l;
         if(!l.loadConfig(config) || !l.loadControls(controls)){
             return;
         }
@@ -47,6 +47,9 @@ void GameMaster::start(){
     }
     srand(time(NULL));
     mainLoop();
+    if(players.size()==1){
+        l.updateLeaderboard(players.front()->name);
+    }
     reset();
     return start();
 }
@@ -92,6 +95,11 @@ void GameMaster::mainLoop(){
             }
         }
         if(players.size()<=1){
+            if(players.size()==0){
+                ui.endScreen("");
+            } else {
+                ui.endScreen(players.front()->name);
+            }
             return;
         }
     }    
@@ -103,7 +111,10 @@ void GameMaster::moveCharacter(int x, int y, Character & pl, UI & ui){
         pl.xPos=x;
         pl.yPos=y;
         if(map(x,y)==powerup){
-            powerUpHandler.pickUp(pl);
+            std::string bonus = powerUpHandler.pickUp(pl);
+            if(bonus!=""){
+                ui.updateBonus(pl,bonus);
+            }
             map(x,y)=empty;
             map.drawQueue.push({x,y});
         }

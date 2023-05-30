@@ -1,5 +1,5 @@
 #include "PowerUp.h"
 
 class MovementSpeed : public PowerUp {
-    void pickUp(Character & pl) override;
+    std::string pickUp(Character & pl) override;
 };

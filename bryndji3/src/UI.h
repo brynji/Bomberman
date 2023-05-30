@@ -30,6 +30,7 @@
 #define player3Color 12
 #define player4Color 13
 
+///Draws map and other information to the screen
 class UI{
 public:
     ///Prepare screen for ncurses and colors

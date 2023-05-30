@@ -2,6 +2,7 @@
 
 #include "Character.h"
 
+///Abstract class for all powerUps
 class PowerUp{
     public:
     virtual ~PowerUp()=default;

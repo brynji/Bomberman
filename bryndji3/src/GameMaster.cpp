@@ -42,7 +42,7 @@ void GameMaster::start(){
     }
     for(int i=0;i<numOfPc;i++){
         players.emplace_back(std::make_unique<Enemy>(map.playerSpawnPositions.front().first,map.playerSpawnPositions.front().second,i+10+numOfPlayers,
-        health,explosionSize,maxBombs,moveDelay,bombDelay));
+        health,explosionSize,maxBombs,moveDelay,bombDelay,&map, &players));
         map.playerSpawnPositions.pop();
     }
     srand(time(NULL));

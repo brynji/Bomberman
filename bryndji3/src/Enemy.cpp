@@ -158,6 +158,10 @@ void Enemy::runFrom(int x, int y, int & xOut, int & yOut)const{
             xOut=xPos-1;
         } else if(y!=0 && canMoveOn(xPos,yPos+(-1*y))){
             yOut=yPos+(-1*y);
+        } else if(canMoveOn(xPos,yPos+1)){
+            yOut=yPos+1;
+        } else if(canMoveOn(xPos, yPos-1)){
+            yOut=yPos-1;
         }
     } else {
         if(canMoveOn(xPos,yPos+1)){

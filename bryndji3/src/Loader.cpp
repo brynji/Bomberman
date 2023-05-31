@@ -40,7 +40,7 @@ bool Loader::loadConfig(std::map<std::string,int> & config){
     if(!load<int>(config,configPath,"config")){
         return false;
     }
-
+    //Check if config has everything needed
     if( config.find("biggerExplosion_chance")==config.end() ||
         config.find("fasterExplosion_chance")==config.end() ||
         config.find("movementSpeed_chance")==config.end()   ||
@@ -63,6 +63,7 @@ bool Loader::loadControls(std::map<std::string,char> & config){
     if(!load<char>(config,controlsPath,"controls")){
         return false;
     }
+    //Check if controls file has everything needed
     if(     config.find("player1_up")==config.end()     ||
             config.find("player1_down")==config.end()   ||
             config.find("player1_left")==config.end()   ||

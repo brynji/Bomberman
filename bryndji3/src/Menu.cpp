@@ -43,9 +43,9 @@ void Menu::showLeaderboard(){
         getch();
         return;
     }
-    auto it = leaders.begin();
+    auto it = leaders.rbegin();
     int i=2;
-    while(it!=leaders.end()){
+    while(it!=leaders.rend()){
         mvaddstr(i,3,it->c_str());
         i++;
         it++;

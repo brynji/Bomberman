@@ -135,13 +135,7 @@ void Loader::updateLeaderboard(std::string name){
     if(!loadLeaderboard(leaders)){
         return;
     }
-    std::fstream delLeader(leaderboardPath, std::fstream::out | std::fstream::trunc);
-    delLeader.close();
-
-    std::ofstream newLeader(leaderboardPath);
+    std::ofstream newLeader(leaderboardPath, std::ios::app);
     newLeader<<name+'\n';
-    for(std::string & x : leaders){
-        newLeader<<x+'\n';
-    }
     newLeader.close();
 }

@@ -29,19 +29,22 @@ Hra je pro 1 až 4 hráče s možností doplnění hráčů o počítačem ovlá
 Hráči pokládají bomby, které mohou zabít ostatní hráče nebo rozbít některé objekty na mapě, ze kterých následně může 
 vypadnout nějaký bonus.
 
-Polymorfismus se využívá mezi třídou GameObject a ostatními objekty, při volání funkcí hit() a stepOn().
-Druhý se objeví později mezi Character a postavami hráčů a počítačem ovládaného protihráče.
+Polymorfismus se využívá mezi třídami Player a Enemy, pro obecné ovládání hráčem ovládané postavy i počítačem ovládaného protihráče.
+Dále se využívá při volání powerUp.pickUp(), kde se opět užívá pro přidávání bonusů oboum typům postav.
+Ve třídě PowerUpHandler se ještě využívá při výběru powerUpu, který má zrovna hráč dostat.
 
-Seznam bonusů (pravděpodobně se ještě změní):
+Seznam bonusů:
     - počet bomb které hráč může mít v jednu chvíli položené na mapě
     - větší dosah výbuchu bomby
     - bonusový život
     - zvýšená rychlost pohybu
-    - hráč bude dočasně moci chodit přes bomby
+    - zvýšená rychlost výbuchu bomby
 
 Konfigurační soubor je ve formátu:
     [název proměnné] = [hodnota] [libovolné komentáře do konce řádku]
-    +pravděpodobně bude možnost komentovat pokud bude řádka začínat například s '/'
+    +možnost komentovat pokud bude řádka začínat například s '/'
+    - v konfiguračním souboru se dají nastavit pravděpodobnosti jednotlivých bonusů
+    a základní parametry hráče.
 
 Mapa je ve formátu:
 výška šířka
@@ -55,18 +58,7 @@ P x  x  c x x c P
 'P' označuje místo, kde se na začátku hry objeví postavy
 'x' je zeď
 'c' je zničitelná krabice
-Při menším počtu znaků než jsou rozměry mapy je zbytek doplněn prázdným místem, jako by v soubotu byly znaky ' '.
 
-Tabulka nejlepších hráčů obsahuje seznam všech hráčů kteří hru hráli, společně s počtem odehraných her a počtem výher.
+Při menším počtu znaků než jsou rozměry mapy je zbytek doplněn prázdným místem, jako by v souboru byly znaky ' '.
 
-Parametry GameObjectu a proměnné "std::array<std::string,3> icon" obsahují 3 stringy o 5 znacích, které se vykreslí na obrazovku jako tento objekt. 
-Parametry GameObjectu a jeho dětí mohou být maličko nesmyslné nebo vypadat zmateně, ještě uvidím jaká část jich bude v konfiguračním souboru a jaká se
-dá vyřešit nějak lépe než jsou teď.
-
-V současné době lze načítat konfigurační soubor a mapu, ta by se i měla vykreslit na obrazovku. 
-Pravděpodobně může spadnout při nějakých nepravostech, obzvláště u načítání mapy.
-Chyby vypsané při načítání konfiguračního souboru nejsou vidět až do konce hry, oprava bude....někdy...
-Ve třídě GameMaster je slovně popsaná základní herní smyčka.
-
-Makefile je silně inspirovaný proseminářem, ale nejsem si jistý jak má fungovat make deps a include, na to se ještě podívám.
-Dále bych rád nějak vylepšil závislosti základního pravidla, aby se do něj nemusely vypisovat názvy všech souborů.
+Tabulka nejlepších hráčů obsahuje seznam všech hráčů kteří hru vyhráli.
